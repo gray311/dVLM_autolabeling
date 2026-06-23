@@ -14,11 +14,12 @@ import json
 import os
 import time
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+# Repo root = parent of utils/ (this file lives in utils/).
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # All overridable via env (the demo/ uses this to point at its bundled frames).
-FRAMES_DIR = os.environ.get("FRAMES_DIR", os.path.join(HERE, "frames"))
+FRAMES_DIR = os.environ.get("FRAMES_DIR", os.path.join(ROOT, "frames"))
 MANIFEST = os.environ.get("MANIFEST", os.path.join(FRAMES_DIR, "manifest.json"))
-RESULTS_DIR = os.environ.get("RESULTS_DIR", os.path.join(HERE, "results"))
+RESULTS_DIR = os.environ.get("RESULTS_DIR", os.path.join(ROOT, "results"))
 
 # Common decoding budget shared by every model (fair comparison).
 MAX_NEW_TOKENS = 512

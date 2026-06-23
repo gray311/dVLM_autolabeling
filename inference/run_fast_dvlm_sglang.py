@@ -12,7 +12,7 @@ import time
 # Drop our own dir so `import sglang` resolves to the fork, not a local file.
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path = [p for p in sys.path if os.path.abspath(p) != _HERE]
-sys.path.insert(0, _HERE)  # but keep it for `import common`
+sys.path.insert(0, os.path.join(_HERE, "..", "utils"))  # for `import common`
 
 import common
 

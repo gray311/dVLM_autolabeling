@@ -4,7 +4,7 @@
 # is killed.  Works for DiffusionGemma-26B and Qwen3-VL-8B.
 #   vllm_serve_and_label.sh <model_path> <served_name> <key> "<display>" <limit|0> [extra vllm flags...]
 set -u
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/paths.sh"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/../paths.sh"
 cd "$AUTOLABEL_DIR"; mkdir -p logs
 PORT=${PORT:-8000}
 BINDS=""; for d in $BIND_DIRS; do BINDS="$BINDS -B $d:$d"; done
@@ -29,7 +29,7 @@ for i in $(seq 1 1200); do
 done
 [ $ok -eq 1 ] || { echo "TIMEOUT waiting for health"; kill $SVPID 2>/dev/null; exit 1; }
 
-$PY_CLIENT run_vllm_client.py --base-url http://localhost:$PORT/v1 \
+$PY_CLIENT "$HERE/run_vllm_client.py" --base-url http://localhost:$PORT/v1 \
   --model "$SNAME" --key "$KEY" --name "$DISP" $LIMARG
 RC=$?
 

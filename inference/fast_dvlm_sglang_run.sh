@@ -9,7 +9,7 @@
 #   ENABLE_CG=0            -> CUDA graph OFF (uses --attention-backend triton)
 #   ATTN_BACKEND=triton    -> attention backend when CUDA graph is OFF
 set -u
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/paths.sh"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/../paths.sh"
 cd "$AUTOLABEL_DIR"; mkdir -p logs
 LIMIT="${1:-0}"
 LIMARG=""; [ "$LIMIT" != "0" ] && LIMARG="--limit $LIMIT"
@@ -43,5 +43,5 @@ apptainer exec --nv --cleanenv $BINDS $XENV \
   --env PATH=/usr/local/bin:/usr/bin:/bin \
   "$SGLANG_SIF" bash -lc "
     python -c 'import qwen_vl_utils' 2>/dev/null || pip install --user -q --break-system-packages --no-deps qwen_vl_utils packaging
-    python $AUTOLABEL_DIR/run_fast_dvlm_sglang.py --algorithm mdm ${CG_FLAG} --mem-fraction-static 0.7 --attention-backend ${ATTN_BACKEND:-triton} $LIMARG
+    python $HERE/run_fast_dvlm_sglang.py --algorithm mdm ${CG_FLAG} --mem-fraction-static 0.7 --attention-backend ${ATTN_BACKEND:-triton} $LIMARG
   "

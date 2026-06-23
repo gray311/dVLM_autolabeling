@@ -4,7 +4,7 @@
 # is the model's native diffusion serving path.
 #   nemotron_serve_and_label.sh <limit|0>
 set -u
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/paths.sh"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; source "$HERE/../paths.sh"
 cd "$AUTOLABEL_DIR"; mkdir -p logs
 PORT=${PORT:-30000}
 LIMIT="${1:-0}"
@@ -24,7 +24,7 @@ for i in $(seq 1 600); do
 done
 [ $ok -eq 1 ] || { echo "TIMEOUT"; kill $SVPID 2>/dev/null; exit 1; }
 
-$PY_CLIENT run_vllm_client.py --base-url http://localhost:$PORT/v1 \
+$PY_CLIENT "$HERE/run_vllm_client.py" --base-url http://localhost:$PORT/v1 \
   --model nemotron --key nemotron --name "Nemotron-Diffusion-VLM-8B (FastAPI diffusion)" \
   --note "native FastAPI diffusion server (model.generate); SGLang can't serve this VLM arch" $LIMARG
 RC=$?

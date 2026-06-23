@@ -43,30 +43,32 @@ See [`demo/README.md`](demo/README.md) and the committed `demo/example_output_fa
 
 ```
 paths.sh                     # <-- EDIT THIS: all machine-specific paths (models, containers, conda pythons)
-common.py                    # shared prompt + token budget + metrics + result schema
-prepare_frames.py            # extract 50 frames from the dataset (videos+stills) -> frames/manifest.json
-compare.py                   # aggregate results/*.json -> comparison table + results/comparison.json
+README.md  REPORT.md         # this guide / full speed+quality writeup + conclusions
 
-# --- inference launchers (serve a model, label all frames, save results/<key>.json) ---
-vllm_serve_and_label.sh      # vLLM container: DiffusionGemma & Qwen3-VL
-fast_dvlm_sglang_run.sh      # SGLang container: Fast-dVLM (offline Engine)
-nemotron_serve_and_label.sh  # Nemotron FastAPI diffusion server
-run_vllm_client.py           # OpenAI-compatible client used by the vLLM + Nemotron launchers
-run_fast_dvlm_sglang.py      # SGLang Engine batch runner (runs INSIDE the sglang container)
+utils/                       # shared helpers
+  common.py                  #   shared prompt + token budget + metrics + result schema
+  prepare_frames.py          #   extract 50 frames from the dataset -> frames/manifest.json
+  compare.py                 #   aggregate results/*.json -> comparison table
 
-# --- HF-transformers fallback runners (no containers; one GPU each) ---
-run_fast_dvlm.py  run_nemotron.py  run_qwen3vl.py  run_diffusiongemma.py
-run_all.sh                   # HF baseline for the 3 small models
+inference/                   # serve a model + label all frames -> results/<key>.json
+  vllm_serve_and_label.sh    #   vLLM container: DiffusionGemma & Qwen3-VL
+  fast_dvlm_sglang_run.sh    #   SGLang container: Fast-dVLM
+  nemotron_serve_and_label.sh#   Nemotron FastAPI diffusion server
+  run_vllm_client.py         #   OpenAI-compatible client (vLLM + Nemotron launchers)
+  run_fast_dvlm_sglang.py    #   SGLang Engine batch runner (runs INSIDE the sglang container)
+  run_fast_dvlm.py  run_nemotron.py  run_qwen3vl.py  run_diffusiongemma.py  # HF fallbacks (no containers)
 
-# --- Slurm ---
-sbatch_all4_h100.sh          # all 4 on one H100 (vLLM + FastAPI + SGLang)  <-- main entrypoint
-sbatch_all4_a100.sh          # same, a100 partition
-sbatch_fastdvlm_sglang_h100.sh  # just Fast-dVLM SGLang
+scripts/                     # orchestration
+  sbatch_all4_h100.sh        #   all 4 on one H100 (vLLM + FastAPI + SGLang)  <-- main entrypoint
+  sbatch_all4_a100.sh        #   same, a100 partition
+  sbatch_fastdvlm_sglang_h100.sh  # just Fast-dVLM SGLang
+  run_all.sh                 #   HF baseline for the 3 small models (no containers)
 
+demo/                        # one-click demo: 6 bundled frames + run_demo.sh
 results/                     # the autolabel outputs + comparison.json (engine-based, H100)
 results_l40s/                # earlier HF-on-L40S baseline (engine-controlled)
-REPORT.md                    # full speed + quality writeup and conclusions
 ```
+All scripts are run from the **repo root** and locate their siblings automatically.
 
 ---
 
@@ -107,7 +109,7 @@ Everything else reads from there.
 
 ### 5. Frames
 ```bash
-DATASET_DIR=/path/to/dataset/with/mp4s_and_images  $PY_CLIENT prepare_frames.py
+DATASET_DIR=/path/to/dataset/with/mp4s_and_images  $PY_CLIENT utils/prepare_frames.py
 # -> frames/frame_###.jpg + frames/manifest.json (50 frames)
 ```
 
@@ -123,13 +125,13 @@ needs ≥80 GB; Qwen3-VL-8B fits in ~24 GB).
 source ./paths.sh
 
 # DiffusionGemma-26B  (args: <model_path> <served_name> <results_key> "<display>" <limit|0> [vllm flags...])
-bash vllm_serve_and_label.sh "$MODEL_ROOT/diffusiongemma-26B-A4B-it" \
+bash inference/vllm_serve_and_label.sh "$MODEL_ROOT/diffusiongemma-26B-A4B-it" \
      diffusiongemma diffusiongemma "DiffusionGemma-26B (vLLM)" 0 \
      --max-model-len 8192 --mm-processor-kwargs '{"max_soft_tokens":1120}' \
      --limit-mm-per-prompt '{"image":1}'
 
 # Qwen3-VL-8B (AR control)
-bash vllm_serve_and_label.sh "$MODEL_ROOT/Qwen3-VL-8B-Instruct" \
+bash inference/vllm_serve_and_label.sh "$MODEL_ROOT/Qwen3-VL-8B-Instruct" \
      qwen3vl qwen3vl "Qwen3-VL-8B (vLLM, AR control)" 0 \
      --max-model-len 8192 --limit-mm-per-prompt '{"image":1}'
 ```
@@ -141,7 +143,7 @@ apptainer exec --nv -B /weka/home -B /weka/scratch --env HF_HOME=$MODEL_ROOT $VL
   --gpu-memory-utilization 0.90 --max-num-seqs 4 --host 0.0.0.0 --port 8000 \
   --max-model-len 8192 --mm-processor-kwargs '{"max_soft_tokens":1120}' --limit-mm-per-prompt '{"image":1}'
 ```
-Then `run_vllm_client.py --base-url http://localhost:8000/v1 --model diffusiongemma ...`.
+Then `inference/run_vllm_client.py --base-url http://localhost:8000/v1 --model diffusiongemma ...`.
 
 > **Gotcha:** do **not** pass `--reasoning-parser gemma4` — it routes the answer to
 > `reasoning_content` and leaves `content: null`. (The client falls back to
@@ -160,7 +162,7 @@ first run. One command labels all frames via the offline `sgl.Engine`:
 
 ```bash
 source ./paths.sh
-CUDA_VISIBLE_DEVICES=0 ENABLE_CG=1 bash fast_dvlm_sglang_run.sh 0     # 0 = all frames; or a small N to smoke-test
+CUDA_VISIBLE_DEVICES=0 ENABLE_CG=1 bash inference/fast_dvlm_sglang_run.sh 0     # 0 = all frames; or a small N to smoke-test
 ```
 
 Toggles:
@@ -185,7 +187,7 @@ SGLang implementation — the dLLM fork only added the *text* decoder. Use its F
 
 ```bash
 source ./paths.sh
-CUDA_VISIBLE_DEVICES=0 bash nemotron_serve_and_label.sh 0
+CUDA_VISIBLE_DEVICES=0 bash inference/nemotron_serve_and_label.sh 0
 ```
 Starts `$NEMOTRON_REPO/vlm_serve/serve_vlm.py` (OpenAI-compatible, runs the model's native
 diffusion `model.generate`), labels all frames, reports `nfe` → tokens/forward.
@@ -196,10 +198,10 @@ diffusion `model.generate`), labels all frames, reports `nfe` → tokens/forward
 
 For the 3 small models without any container (one GPU each, plain HF):
 ```bash
-bash run_all.sh        # Fast-dVLM (fastdvlm env) + Nemotron + Qwen3-VL (dllm env)
+bash scripts/run_all.sh        # Fast-dVLM (fastdvlm env) + Nemotron + Qwen3-VL (dllm env)
 ```
-Individual: `$PY_FASTDVLM run_fast_dvlm.py [--limit N]`, `$PY_NEMO run_qwen3vl.py`, etc.
-DiffusionGemma-26B has an HF runner too (`run_diffusiongemma.py`) but only fits with offload
+Individual: `$PY_FASTDVLM inference/run_fast_dvlm.py [--limit N]`, `$PY_NEMO inference/run_qwen3vl.py`, etc.
+DiffusionGemma-26B has an HF runner too (`inference/run_diffusiongemma.py`) but only fits with offload
 on <80 GB cards — use vLLM instead.
 
 ---
@@ -208,14 +210,14 @@ on <80 GB cards — use vLLM instead.
 
 ```bash
 # all four on ONE H100 (vLLM + FastAPI + SGLang), then compare.py
-sbatch sbatch_all4_h100.sh           # edit -A / -p for your cluster; submit from the repo dir
+sbatch scripts/sbatch_all4_h100.sh           # edit -A / -p for your cluster; submit from the repo dir
 
 # or interactively on a GPU node:
 source ./paths.sh
-bash sbatch_all4_h100.sh             # the body runs fine outside Slurm too
+bash scripts/sbatch_all4_h100.sh             # the body runs fine outside Slurm too
 
 # regenerate the table any time:
-$PY_CLIENT compare.py
+$PY_CLIENT utils/compare.py
 ```
 
 `compare.py` prints load time, latency/frame, tok/s, tokens/forward, output length,

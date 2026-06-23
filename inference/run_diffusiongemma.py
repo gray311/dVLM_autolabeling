@@ -27,6 +27,8 @@ def _ignore_patched(padding_mask, *a, **k):
     return _orig_ignore(padding_mask, *a, **k)
 _mu._ignore_bidirectional_mask_sdpa = _ignore_patched
 
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "utils"))
 import common
 
 MODEL_PATH = os.path.join(os.environ.get("MODEL_ROOT",

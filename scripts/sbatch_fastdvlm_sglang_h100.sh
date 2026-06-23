@@ -7,16 +7,16 @@
 #SBATCH --time=01:30:00
 #SBATCH --job-name=fastdvlm_sgl
 #SBATCH --output=logs/fastdvlm_sglang_h100_%j.out
-# ^ EDIT -A / -p for your cluster. Submit from the repo dir so logs/ resolves.
+# ^ EDIT -A / -p for your cluster. Submit from the repo ROOT: `sbatch scripts/sbatch_fastdvlm_sglang_h100.sh`
 
 # Fast-dVLM-3B via the vendored SGLang fork (HierarchyBlock + CUDA graph) only.
 # Overwrites results/fast_dvlm.json, then regenerates the comparison.
 set -u
-cd "$(dirname "$0")"; source ./paths.sh
+cd "$(dirname "$0")/.."; source ./paths.sh   # repo root
 export PYTHONIOENCODING=utf-8 PYTHONUTF8=1
 echo "node=$(hostname)"; nvidia-smi --query-gpu=name,memory.total --format=csv
 
-CUDA_VISIBLE_DEVICES=0 ENABLE_CG=1 bash fast_dvlm_sglang_run.sh 0
+CUDA_VISIBLE_DEVICES=0 ENABLE_CG=1 bash inference/fast_dvlm_sglang_run.sh 0
 
 echo "########## Fast-dVLM SGLang done; regenerating comparison ##########"
-$PY_CLIENT compare.py
+$PY_CLIENT utils/compare.py

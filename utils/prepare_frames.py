@@ -9,8 +9,8 @@ import cv2
 
 DATASET = os.environ.get("DATASET_DIR",
     "/weka/home/ext-yingzima/CulturalDrive/dataset/videos")  # dir of .mp4 / .png / .jpg
-HERE = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR = os.path.join(HERE, "frames")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root (parent of utils/)
+OUT_DIR = os.environ.get("FRAMES_DIR", os.path.join(ROOT, "frames"))
 N_TARGET = 50
 
 

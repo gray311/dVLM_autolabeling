@@ -31,20 +31,20 @@ cd "$REPO"
 
 case "$MODEL" in
   fast_dvlm)
-    CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} ENABLE_CG=1 bash fast_dvlm_sglang_run.sh 0
+    CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} ENABLE_CG=1 bash inference/fast_dvlm_sglang_run.sh 0
     ;;
   diffusiongemma)
-    bash vllm_serve_and_label.sh "$MODEL_ROOT/diffusiongemma-26B-A4B-it" \
+    bash inference/vllm_serve_and_label.sh "$MODEL_ROOT/diffusiongemma-26B-A4B-it" \
       diffusiongemma diffusiongemma "DiffusionGemma-26B (vLLM)" 0 \
       --max-model-len 8192 --mm-processor-kwargs '{"max_soft_tokens":1120}' --limit-mm-per-prompt '{"image":1}'
     ;;
   qwen3vl)
-    bash vllm_serve_and_label.sh "$MODEL_ROOT/Qwen3-VL-8B-Instruct" \
+    bash inference/vllm_serve_and_label.sh "$MODEL_ROOT/Qwen3-VL-8B-Instruct" \
       qwen3vl qwen3vl "Qwen3-VL-8B (vLLM)" 0 \
       --max-model-len 8192 --limit-mm-per-prompt '{"image":1}'
     ;;
   nemotron)
-    CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} bash nemotron_serve_and_label.sh 0
+    CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} bash inference/nemotron_serve_and_label.sh 0
     ;;
   *) echo "unknown model '$MODEL' (use: fast_dvlm | diffusiongemma | qwen3vl | nemotron)"; exit 1 ;;
 esac
