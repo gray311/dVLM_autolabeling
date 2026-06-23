@@ -29,67 +29,52 @@ Columns: **GT** = target token · **f1** = forward-1 argmax (model's denoise pre
 
 | pos | GT | f1 | M2T | corrector_in | role | err | f2 | corr |
 |---|---|---|---|---|---|---|---|---|
-| 385 | Maint | 1 | — | green | inject(rand) | ✗ | maint | +1.96 |
-| 386 | ain | ain | — | ain | keep-GT |  | ain | -0.48 |
-| 387 | a | a | — | your | sample(top2) | ✗ | your | +1.17 |
-| 388 | safe | moderate | — | safe | keep-GT |  | safe | -0.95 |
-| 389 | following | distance | — | following | keep-GT |  | following | -0.49 |
-| 390 | distance | distance | 0.00 | distance | mask→fill |  | distance | -0.99 |
-| 391 | from | behind | — | cyclist | inject(rand) | ✗ | from | +0.96 |
-| 392 | the | the | — | other | sample(top2) | ✗ | other | +4.59 |
-| 393 | red | red | 0.15 | red | mask→fill |  | red | -0.75 |
-| 394 | truck | truck | — | truck | keep-GT |  | truck | -0.62 |
-| 395 | , | , | — | , | keep-GT |  | , | -0.96 |
-| 396 | monitor | and | — | and | sample(top2) | ✗ | and | +11.12 |
-| 397 | the | the | — | the | keep-GT |  | the | -0.91 |
-| 398 | bus | traffic | — | truck | inject(rand) | ✗ | truck | +3.59 |
-| 399 | 's | 's | — | 's | keep-GT |  | 's | -0.99 |
-| 400 | actions | movements | 5.50 | movements | mask→fill | ✗ | actions | +0.70 |
-| 401 | closely | , | 9.50 | , | mask→fill | ✗ | . | +11.06 |
-| 402 | and | and | 0.41 | and | mask→fill |  | and | -0.84 |
-| 403 | be | be | 0.17 | be | mask→fill |  | be | -0.33 |
-| 404 | prepared | ready | — | prepared | keep-GT |  | ready | -0.19 |
-| 405 | for | to | 3.42 | to | mask→fill | ✗ | to | +0.76 |
-| 406 | pedestrians | braking | 6.50 | braking | mask→fill | ✗ | stop | +15.00 |
-| 407 | , | , | — | , | keep-GT |  | , | -0.57 |
-| 408 | especially | especially | 0.90 | especially | mask→fill |  | due | -0.17 |
-| 409 | around | the | — | around | keep-GT |  | when | -0.10 |
+| 385 | Maint | 1 | — | 1 | model-err(vis) | ✗ | P | +4.28 |
+| 386 | ain | ain | — | ain | keep-GT |  | ead | -0.01 |
+| 387 | a | a | — | your | sample(top2) | ✗ | in | +2.94 |
+| 388 | safe | moderate | — | moderate | model-err(vis) | ✗ | moderate | +5.22 |
+| 389 | following | distance | — | distance | model-err(vis) | ✗ | speed | +4.41 |
+| 390 | distance | distance | 0.00 | distance | mask→fill |  | distance | -0.96 |
+| 391 | from | behind | — | behind | model-err(vis) | ✗ | behind | +2.59 |
+| 392 | the | the | — | other | sample(top2) | ✗ | other | +3.53 |
+| 393 | red | red | 0.15 | red | mask→fill |  | red | -0.96 |
+| 394 | truck | truck | — | truck | keep-GT |  | truck | -0.98 |
+| 395 | , | , | — | , | keep-GT |  | , | -0.99 |
+| 396 | monitor | and | — | and | model-err(vis) | ✗ | and | +13.44 |
+| 397 | the | the | — | the | keep-GT |  | the | -1.00 |
+| 398 | bus | traffic | — | traffic | model-err(vis) | ✗ | traffic | +7.44 |
+| 399 | 's | 's | — | 's | keep-GT |  | 's | -1.00 |
+| 400 | actions | movements | 5.50 | movements | mask→fill | ✗ | movements | +5.81 |
+| 401 | closely | , | 9.50 | , | mask→fill | ✗ | , | +13.75 |
+| 402 | and | and | 0.41 | and | mask→fill |  | and | -1.00 |
+| 403 | be | be | 0.17 | be | mask→fill |  | be | -0.41 |
+| 404 | prepared | ready | — | ready | model-err(vis) | ✗ | ready | +1.35 |
+| 405 | for | to | 3.42 | to | mask→fill | ✗ | to | +3.89 |
+| 406 | pedestrians | braking | 6.50 | braking | mask→fill | ✗ | stop | +17.38 |
+| 407 | , | , | — | , | keep-GT |  | , | -1.00 |
+| 408 | especially | especially | 0.90 | especially | mask→fill |  | especially | -0.50 |
+| 409 | around | the | — | the | model-err(vis) | ✗ | the | +11.44 |
 | 410 | the | the | 0.02 | the | mask→fill |  | the | -0.99 |
-| 411 | bus | bus | — | bus | keep-GT |  | bus | -0.66 |
-| 412 | stop | 's | 1.23 | 's | mask→fill | ✗ | stop | +0.78 |
-| 413 | area | . | — | area | keep-GT |  | area | -0.38 |
-| 414 | . | . | 0.00 | . | mask→fill |  | . | -0.98 |
-| 415 | Keep | Follow | — | van | inject(rand) | ✗ | wait | +4.88 |
-| 416 | in | an | — | in | keep-GT |  | in | -0.93 |
-| 417 | the | the | 0.05 | the | mask→fill |  | the | -0.99 |
-| 418 | appropriate | the | — | appropriate | keep-GT |  | left | -0.01 |
-| 419 | lane | lane | — | lane | keep-GT |  | lane | -0.92 |
-| 420 | as | as | 0.45 | as | mask→fill |  | as | -0.92 |
-| 421 | indicated | as | — | indicated | keep-GT |  | shown | -0.04 |
-| 422 | by | by | 0.01 | by | mask→fill |  | by | -0.98 |
+| 411 | bus | bus | — | bus | keep-GT |  | bus | -0.93 |
+| 412 | stop | 's | 1.23 | 's | mask→fill | ✗ | 's | +7.28 |
+| 413 | area | . | — | . | model-err(vis) | ✗ | . | +10.56 |
+| 414 | . | . | 0.00 | . | mask→fill |  | 2 | -0.00 |
+| 415 | Keep | Follow | — | Follow | model-err(vis) | ✗ | Keep | +1.15 |
+| 416 | in | an | — | an | model-err(vis) | ✗ | the | +9.25 |
+| 417 | the | the | 0.05 | the | mask→fill |  | the | -1.00 |
+| 418 | appropriate | the | — | the | model-err(vis) | ✗ | right | +6.88 |
+| 419 | lane | lane | — | lane | keep-GT |  | lane | -0.64 |
+| 420 | as | as | 0.45 | as | mask→fill |  | as | -0.90 |
+| 421 | indicated | as | — | as | model-err(vis) | ✗ | ahead | +3.38 |
+| 422 | by | by | 0.01 | by | mask→fill |  | to | -0.34 |
 | 423 | the | the | 0.02 | the | mask→fill |  | the | -1.00 |
-| 424 | overhead | overhead | — | overhead | keep-GT |  | overhead | -0.67 |
+| 424 | overhead | overhead | — | overhead | keep-GT |  | overhead | -0.97 |
 
 _(+22 more answer positions truncated)_
 
 ## 8. Losses (this example)
 
 - **M2T / mdlm_loss** = mean `-logp(GT)` over the **23 masked** positions = **1.5469**.
-- **corrector_loss** = mean over **all 62 answer** positions of (`-logp` at the **22 err** positions, `-p` at the rest) = **1.0938** (positive here ⇒ the 22 err positions' `-logp` outweigh the `-p` stability on the 40 correct positions; on easier examples the `-p` term can make it negative).
-- **total** = `w_mdlm·mdlm + w_corrector·corrector` = 1.0·1.5469 + 1.0·1.0938 = **2.6406**.
-- `rollout_error_frac` = 22/62 = **0.355** (inject=6, sample=9, mask-fill-err=7).
-
-## 9. How to read this (base model, pre-warmup)
-
-This is the **untrained base** (no warmup yet), so the `f2` column — forward-2's attempt to rewrite the
-corrupted `corrector_in` back to GT — **mostly fails to recover** GT at the err (✗) positions:
-- sample/inject errors usually stay wrong (392 `the`→`other`→f2 `other`; 396 `monitor`→`and`→f2 `and`;
-  415 `Keep`→`van`→f2 `wait`),
-- a few do recover (391 `from`→`cyclist`→**f2 `from`** ✓; 400 `actions`→`movements`→**f2 `actions`** ✓).
-
-That matches the diagnostic verdict (base can't self-correct its own errors). The `-logp` term at err
-positions is exactly the gradient that *teaches* f2 to recover; the `-p` term at the 40 correct
-positions keeps it from rewriting correct tokens (change-not-delete). **End-to-end data flow:** GT
-answer → absorbing-mask 23/62 → forward-1 (M2T loss on masked + denoise argmax) → build corrupted
-`corrector_in` (mask→fill, inject random, sample top-2, keep GT) → forward-2 → correction loss
-(`-logp` to push err→GT, `-p` to hold correct).
+- **corrector_loss** = mean over **all 62 answer** positions of (`-logp` at the **33 err** positions, `-p` at the rest) = **3.3125** (positive ⇒ the err positions' `-logp` outweigh the `-p` stability).
+- **total** = `w_mdlm·mdlm + w_corrector·corrector` = 1.0·1.5469 + 1.0·3.3125 = **4.8750**.
+- `rollout_error_frac` = 33/62 = **0.532** (inject=0, sample=6, mask-fill-err=7).
