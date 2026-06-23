@@ -1,0 +1,212 @@
+{
+  "model": "Fast-dVLM-3B (SGLang mdm)",
+  "prompt": "You are an expert autonomous-driving scene annotator building a reasoning dataset. Analyse this front-camera frame and produce a detailed, structured annotation. Reason step by step in three stages.\n\n1. PERCEPTION: Describe the road type, lane layout, lane markings, traffic signals/signs, crosswalks, lighting and weather, and every important traffic participant (vehicles, pedestrians, cyclists) with its position.\n2. PREDICTION: For the key participants, state their likely short-term behaviour over the next few seconds and why.\n3. PLANNING: State what the ego vehicle should do next and the rule/reason behind it.\nAlso infer the country/region from the road infrastructure, signage and driving side, and justify it.\n\nReturn ONLY a JSON object with these keys: \"scene_description\", \"traffic_elements\", \"dynamic_agents\", \"prediction\", \"planning\", \"region_inference\", \"reasoning\".",
+  "max_new_tokens": 512,
+  "n_frames": 6,
+  "samples": [
+    {
+      "frame_id": 0,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_00.jpg",
+      "latency_s": 3.416,
+      "out_tokens": 435,
+      "tok_per_s": 127.34,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"The image shows a snowy street at night with a car driving on. The road is a two-lane with no visible lane markings. There are no traffic signals or signs visible. The weather is foggy, making it difficult to see the surroundings. The only important traffic participant is the car in the foreground, driving on the right side of the road.\",\n  \"traffic_elements\": [\n  \"two-lane road\",\n  \"no lane markings\",\n  \"no traffic signals or signs\",\n  \"foggy weather\"\n  ],\n  \"dynamic_agents\": [\n    {\n      \"type\": \"car\",\n      \"position\": {\n        \"x\": 0,\n        \"y\": 0,\n        \"width\": 200,\n        \"height\": 100\n      },\n      \"action\": {\n        \"speed\": 30,\n        \"direction\": \"right\"\n      }\n    }\n  ],\n  \"prediction\": {\n    \"car\": \"The car will continue to drive on the right side of the road, maintaining a moderate speed due to the foggy conditions. It is likely to follow the road markings and avoid any sudden movements.\"\n    },\n  \"planning\": {\n    \"action\": \"Continue driving on the right side of the road, maintaining a moderate speed and avoiding sudden movements to    \"reason\": \"The ego vehicle should follow the road rules and regulations to ensure the safety of all road users. The foggy conditions require extra caution and attention to avoid accidents.\"\n    },\n  \"region_inference\": \"The region is likely to Europe or North America, as the road infrastructure, signage, and driving side are consistent with these regions. However, without specific signs or markings, it cannot be confirmed with certainty.\",\n  \"reasoning\": \"The ego vehicle should prioritize the safety of all road users, including pedestrians and cyclists, and follow the road rules and regulations to avoid accidents. The foggy conditions require extra caution and attention to avoid accidents. The ego vehicle should continue driving on the right side of the road, maintaining a moderate speed and avoid sudden movements.\"\n}}",
+      "valid_json": false,
+      "meta": {
+        "id": "239386841c69423990b8bb957f769bc1",
+        "finish_reason": {
+          "type": "stop",
+          "matched": 151645
+        },
+        "prompt_tokens": 2898,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.0016693708021193743,
+        "prefill_launch_delay": 0.01814154419116676,
+        "prefill_launch_latency": 0.7229939429089427,
+        "prefill_finished_ts": 1782232214.2765958,
+        "completion_tokens": 435,
+        "cached_tokens": 0,
+        "e2e_latency": 3.4108221530914307,
+        "request_received_ts": 1782232212.987561,
+        "request_sent_to_scheduler_ts": 1782232213.3656259,
+        "decode_finished_ts": 1782232216.3983831,
+        "inference_time": 2.8629413791932166,
+        "response_sent_to_client_ts": 1782232216.3997543
+      }
+    },
+    {
+      "frame_id": 1,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_01.jpg",
+      "latency_s": 2.166,
+      "out_tokens": 398,
+      "tok_per_s": 183.76,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"The image is a night-time view of a road with a white building in the background. The road has a single lane in each direction, and there are no visible lane markings. There are no traffic signals or signs visible. The road is wet, and there is a bright light source in the distance. There are two pedestrians standing on the right side of the road, and a cyclist riding on the left side of the road.\",\n  \"traffic_elements\": [\n  \"road\",\n  \"building\",\n  \"light\",\n  \"pedestrians\",\n  \"cyclist\"\n  ],\n  \"dynamic_agents\": [\n  \"pedestrians\": {\n    \"position\": [1069, 765],\n    \"action\": \"standing\",\n    \"intent\": \"crossing the road\"\n    },\n  \"cyclist\": {\n    \"position\": [1149, 765],\n    \"action\": \"riding\",\n    \"intent\": \"crossing road\"\n    }\n  ],\n  \"prediction\": {\n  \"pedestrians\": {\n    \"position\": \"moving towards the building\",\n    \"action\": \"walking\",\n    \"intent\": \"crossing the road\"\n    },\n  \"cyclist\": {\n    \"position\": \"moving towards the building\",\n    \"action\": \"riding\",\n    \"intent\": \"crossing road\"\n    }\n  },\n  \"planning\": {\n  \"action\": \"slow down and stop\",\n  \"reason\": \"to ensure the safety of the pedestrians and cyclist crossing the road\"\n  },\n  \"region_inference\": \"The region is likely Europe or the, based on the road infrastructure, signage, and driving side (right-hand drive).\",\n  \"reasoning\": \"The presence of right-hand drive and specific road infrastructure, such as the design of the road and the placement of traffic signs, are indicative of European or regions regions.\"\n}",
+      "valid_json": false,
+      "meta": {
+        "id": "d7287aaf46f14fbfadff6bb0646e93a3",
+        "finish_reason": {
+          "type": "stop",
+          "matched": 151645
+        },
+        "prompt_tokens": 2898,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.00045219482854008675,
+        "prefill_launch_delay": 0.0060791990254074335,
+        "prefill_launch_latency": 0.11507194908335805,
+        "prefill_finished_ts": 1782232217.023349,
+        "completion_tokens": 398,
+        "cached_tokens": 0,
+        "e2e_latency": 2.165462017059326,
+        "request_received_ts": 1782232216.6262643,
+        "request_sent_to_scheduler_ts": 1782232216.7378066,
+        "decode_finished_ts": 1782232218.7917264,
+        "inference_time": 1.8895523350220174,
+        "response_sent_to_client_ts": 1782232218.7918756
+      }
+    },
+    {
+      "frame_id": 2,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_02.jpg",
+      "latency_s": 2.142,
+      "out_tokens": 432,
+      "tok_per_s": 201.64,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"The scene shows a snowy street at night with a person walking on the sidewalk. The road is lined with trees and buildings, and there are streetlights illuminating the area. The sky is covered in snow, and the weather appears to be cold and win.\",\n  \"traffic_elements\": [\n    {\n      \"type\": \"trees\",\n      \"position\": [700, 100, 1000, 800]\n      },\n    {\n      \"type\": \"build\",\n      \"position\": [100, 300, 300, 600]\n      },\n    {\n      \"type\": \"streetlight\",\n      \"position\": [600, 500, 800, 700]\n      },\n  ],\n  \"dynamic_agents\": [\n    {\n      \"type\": \"person\",\n      \"position\": [1200, 700, 1260, 900]\n      },\n  ],\n  \"prediction\": [\n    {\n      \"type\": \"person\",\n      \"position\": [1200, 700, 1260, 900],\n      \"beh\": \"walking\",\n      \"reason\": \"The person is walking on the sidewalk, likely heading to a destination.\"\n      }\n  ],\n  \"planning\": [\n    {\n      \"type\": \"ego_vehicle\",\n      \"position\": \"center\",\n      \"action\": \"slow down\",\n      \"reason\": \"The ego vehicle should slow down to avoid coll the person walking on the sidewalk.\"\n      }\n    ],\n  \"region_inference\": \"The region is likely Europe or North America, as the road infrastructure, signage, and driving side are consistent with these continents.\",\n  \"reasoning\": \"The person is walking on the sidewalk, and the ego vehicle should slow down to avoid colliding with them. The region is likely Europe or North America, as the road infrastructure, signage, and driving side are consistent with these continents.\"\n}",
+      "valid_json": false,
+      "meta": {
+        "id": "37a3d2c7ad9a4dcfbcd99e8e06f01d96",
+        "finish_reason": {
+          "type": "stop",
+          "matched": 151645
+        },
+        "prompt_tokens": 2898,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.0004506520926952362,
+        "prefill_launch_delay": 0.0061643358785659075,
+        "prefill_launch_latency": 0.11525686620734632,
+        "prefill_finished_ts": 1782232219.412478,
+        "completion_tokens": 432,
+        "cached_tokens": 0,
+        "e2e_latency": 2.141988754272461,
+        "request_received_ts": 1782232219.0148153,
+        "request_sent_to_scheduler_ts": 1782232219.1273835,
+        "decode_finished_ts": 1782232221.156804,
+        "inference_time": 1.8657674218993634,
+        "response_sent_to_client_ts": 1782232221.156987
+      }
+    },
+    {
+      "frame_id": 3,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_03.jpg",
+      "latency_s": 1.937,
+      "out_tokens": 371,
+      "tok_per_s": 191.57,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"A city street with a double-decker bus driving on the right side of the road. The road is lined with trees and buildings, and there are no visible traffic signals or signswalks. The lighting is natural, and the weather appears to be clear.\",\n  \"traffic_elements\": [\n    \"road_type\": \"city street\",\n    \"lane_layout\": \"2-lane\",\n    \"lane_markings\": \"solid lines\",\n    \"traffic_signals\": [],\n    \"crosswalks\": [],\n    \"lighting\": \"natural\",\n    \"weather\": \"clear\"\n  ],\n  \"dynamic_agents\": [\n    \"vehicle\": \"double-decker bus\",\n    \"position\": {\n      \"x\": 800,\n      \"y\": 300,\n      \"angle\": \"right\"\n      },\n    \"speed\": \"30-40 km/h\"\n  ],\n  \"prediction\": {\n    \"dynamic_agents\": \"double-decker bus\",\n    \"beh\": \"continue driving on the right side of the road\",\n    \"reason\": \"following traffic rules and road infrastructure\"\n  },\n  \"planning\": {\n    \"action\":\": \"maintain current speed and direction\",\n    \"reason\": \"to reach the destination safely and efficiently\"\n  },\n  \"region_inference\": {\n    \"country\": \"UK\",\n    \"region\": \"London\",\n    \"reason\": \"the presence of a double-decker bus and the road infrastructure\"\n  },\n  \"reasoning\": \"The scene depicts a city street with a double-decker bus driving on the right side of the road, which is a common practice in the UK. London is a well-known city for double-decker buses, so it is inferred that the scene is in the UK, London.\"\n}",
+      "valid_json": false,
+      "meta": {
+        "id": "66e7dd1a9b664f64a03466d2821f281e",
+        "finish_reason": {
+          "type": "stop",
+          "matched": 151645
+        },
+        "prompt_tokens": 2031,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.00044184899888932705,
+        "prefill_launch_delay": 0.004394116112962365,
+        "prefill_launch_latency": 0.08981619100086391,
+        "prefill_finished_ts": 1782232221.579306,
+        "completion_tokens": 371,
+        "cached_tokens": 0,
+        "e2e_latency": 1.9362461566925049,
+        "request_received_ts": 1782232221.2974398,
+        "request_sent_to_scheduler_ts": 1782232221.3733268,
+        "decode_finished_ts": 1782232223.233686,
+        "inference_time": 1.748608980095014,
+        "response_sent_to_client_ts": 1782232223.2338371
+      }
+    },
+    {
+      "frame_id": 4,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_04.jpg",
+      "latency_s": 1.902,
+      "out_tokens": 512,
+      "tok_per_s": 269.13,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"The image shows a multi road with multiple lanes, lane markings, traffic signals, and crosswalk. The road is lined with trees and buildings on the left. The sky is clear and sunny.\",\n  \"traffic_elements\": [\n  {\n    \"type\": \"traffic light\",\n    \"position\": [537, 167],\n    \"color\": \"red\"\n  },\n  {\n    \"type\": \"traffic light\",\n    \"position\": [1759, 270],\n    \"color\": \"green\"\n  },\n  {\n    \"type\": \"crosswalk\",\n    \"position\": [814, 550],\n    \"color\": \"white\"\n  }\n  ],\n  \"dynamic_agents\": [\n  {\n    \"type\": \"vehicle\",\n    \"position\": [0, 550],\n    \"color\": \"gray\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [365, 548],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [505, 528],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [618, 528],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [727, 525],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [800, 520],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [877, 515],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [925, 515],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [999, 515],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [1035, 515],\n    \"color\": \"white\"\n  },\n  {\n    \"type\": \"vehicle\",\n    \"position\": [1100, 515],\n    \"color\": \"white\"\n  },",
+      "valid_json": false,
+      "meta": {
+        "id": "78d82c7f911c4c55ba22d283e7858014",
+        "finish_reason": {
+          "type": "length",
+          "length": 512
+        },
+        "prompt_tokens": 2251,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.000437422888353467,
+        "prefill_launch_delay": 0.004944636020809412,
+        "prefill_launch_latency": 0.09507888299413025,
+        "prefill_finished_ts": 1782232223.698894,
+        "completion_tokens": 512,
+        "cached_tokens": 0,
+        "e2e_latency": 1.901996374130249,
+        "request_received_ts": 1782232223.387005,
+        "request_sent_to_scheduler_ts": 1782232223.4739463,
+        "decode_finished_ts": 1782232225.2890015,
+        "inference_time": 1.6901486460119486,
+        "response_sent_to_client_ts": 1782232225.2891874
+      }
+    },
+    {
+      "frame_id": 5,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/demo/frames/demo_05.jpg",
+      "latency_s": 2.494,
+      "out_tokens": 489,
+      "tok_per_s": 196.08,
+      "tokens_per_forward": null,
+      "output": "{\n  \"scene_description\": \"The image shows a city street scene with a building on on the right side. The road is a multi-l with a crosswalk in the middle. There are several cars on the road, including a black car in the middle. There are also people on the sidewalk and a person crossing the street. The weather is cloudy and the lighting is natural.\",\n  \"traffic_elements\": [\n    {\n      \"type\": \"building\",\n      \"position\": [0, 0, 896, 600]\n    }\n  ],\n  \"dynamic_agents\": [\n    {\n      \"type\": \"car\",\n      \"position\": [645, 532, 839, 645]\n      },\n    {\n      \"type\": \"car\",\n      \"position\": [839, 525, 910, 600]\n      },\n    {\n      \"type\": \"car\",\n      \"position\": [910, 525, 999, 600]\n      },\n    {\n      \"type\": \"person\",\n      \"position\": [167, 500, 230, 645]\n      },\n    {\n      \"type\": \"person\",\n      \"position\": [270, 480, 333, 645]\n      },\n    {\n      \"type\": \"person\",\n      \"position\": [853, 545, 890, 625]\n      }\n  ],\n  \"prediction\": {\n    \"black_car\": \"The black car will continue to move forward on the road, as there are no signs of or obstacles in its way.\"\n    },\n  \"planning\": {\n    \"ego_vehicle\": \"The ego vehicle should maintain a safe distance from the black car and other vehicles on the road, and avoid any sudden movements that could cause accidents.\"\n    },\n  \"region_inference\": \"The region is China, as indicated by the road infrastructure, signage, and driving side (right-hand drive).\",\n  \"reasoning\": \"The reasoning behind the prediction and planning is based on the current state of the road, the positions and movements of the vehicles and pedestrians, and the rules of the road in China.\"\n}}",
+      "valid_json": false,
+      "meta": {
+        "id": "deda8be2b5be41e78701efbf5db2ef29",
+        "finish_reason": {
+          "type": "stop",
+          "matched": 151645
+        },
+        "prompt_tokens": 2070,
+        "weight_version": "default",
+        "total_retractions": 0,
+        "queue_time": 0.00043216487392783165,
+        "prefill_launch_delay": 0.004502766998484731,
+        "prefill_launch_latency": 0.08286142605356872,
+        "prefill_finished_ts": 1782232225.720101,
+        "completion_tokens": 489,
+        "cached_tokens": 0,
+        "e2e_latency": 2.4935526847839355,
+        "request_received_ts": 1782232225.4390256,
+        "request_sent_to_scheduler_ts": 1782232225.5166163,
+        "decode_finished_ts": 1782232227.9325783,
+        "inference_time": 2.299857425969094,
+        "response_sent_to_client_ts": 1782232227.9327126
+      }
+    }
+  ],
+  "summary": {
+    "load_time_s": 17.3,
+    "n_samples": 6,
+    "n_in_avg": 5,
+    "avg_latency_s": 2.128,
+    "avg_out_tokens": 440.4,
+    "avg_tok_per_s": 206.94,
+    "avg_tokens_per_forward": null,
+    "valid_json_rate": 0.0,
+    "total_wall_s": 14.1
+  },
+  "note": "SGLang fork, dllm_algorithm=HierarchyBlock, bf16"
+}

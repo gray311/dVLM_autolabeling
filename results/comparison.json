@@ -1,0 +1,58 @@
+[
+  {
+    "key": "fast_dvlm",
+    "model": "Fast-dVLM-3B (SGLang mdm)",
+    "load_s": 15.7,
+    "avg_latency_s": 2.202,
+    "tok_per_s": 195.89,
+    "tokens_per_forward": null,
+    "avg_out_tokens": 431.4,
+    "valid_json_rate": 0.08,
+    "struct_completeness": 0.909,
+    "avg_out_chars": 1705,
+    "n_samples": 50,
+    "note": "SGLang fork, dllm_algorithm=HierarchyBlock, bf16"
+  },
+  {
+    "key": "nemotron",
+    "model": "Nemotron-Diffusion-VLM-8B (FastAPI diffusion)",
+    "load_s": 0.0,
+    "avg_latency_s": 5.701,
+    "tok_per_s": 70.45,
+    "tokens_per_forward": 1.776,
+    "avg_out_tokens": 401.6,
+    "valid_json_rate": 0.0,
+    "struct_completeness": 0.977,
+    "avg_out_chars": 1485,
+    "n_samples": 50,
+    "note": "native FastAPI diffusion server (model.generate); SGLang can't serve this VLM arch"
+  },
+  {
+    "key": "diffusiongemma",
+    "model": "DiffusionGemma-26B (vLLM)",
+    "load_s": 0.0,
+    "avg_latency_s": 1.184,
+    "tok_per_s": 431.64,
+    "tokens_per_forward": null,
+    "avg_out_tokens": 511.1,
+    "valid_json_rate": 0.0,
+    "struct_completeness": 0.851,
+    "avg_out_chars": 1963,
+    "n_samples": 50,
+    "note": "OpenAI endpoint http://localhost:8000/v1, model=diffusiongemma"
+  },
+  {
+    "key": "qwen3vl",
+    "model": "Qwen3-VL-8B (vLLM, AR control)",
+    "load_s": 0.0,
+    "avg_latency_s": 3.626,
+    "tok_per_s": 141.2,
+    "tokens_per_forward": null,
+    "avg_out_tokens": 512.0,
+    "valid_json_rate": 0.02,
+    "struct_completeness": 0.757,
+    "avg_out_chars": 2309,
+    "n_samples": 50,
+    "note": "OpenAI endpoint http://localhost:8000/v1, model=qwen3vl"
+  }
+]

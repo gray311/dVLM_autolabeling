@@ -1,0 +1,40 @@
+{
+  "model": "DiffusionGemma-26B-A4B-it",
+  "prompt": "You are an expert autonomous-driving scene annotator building a reasoning dataset. Analyse this front-camera frame and produce a detailed, structured annotation. Reason step by step in three stages.\n\n1. PERCEPTION: Describe the road type, lane layout, lane markings, traffic signals/signs, crosswalks, lighting and weather, and every important traffic participant (vehicles, pedestrians, cyclists) with its position.\n2. PREDICTION: For the key participants, state their likely short-term behaviour over the next few seconds and why.\n3. PLANNING: State what the ego vehicle should do next and the rule/reason behind it.\nAlso infer the country/region from the road infrastructure, signage and driving side, and justify it.\n\nReturn ONLY a JSON object with these keys: \"scene_description\", \"traffic_elements\", \"dynamic_agents\", \"prediction\", \"planning\", \"region_inference\", \"reasoning\".",
+  "max_new_tokens": 512,
+  "n_frames": 2,
+  "samples": [
+    {
+      "frame_id": 0,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_000.jpg",
+      "latency_s": 267.039,
+      "out_tokens": 512,
+      "tok_per_s": 1.92,
+      "tokens_per_forward": 15.033,
+      "output": "```json\n{\n  \"scene_description\": \"Nighttime urban street scene during heavy snowfall or dense fog. The ego-vehicle's view is severely obscured by frost or snow on the camera lens. The road appears to be a two-lane urban residential street with multi-story buildings on the right. Bare winter trees are visible along the sidewalk. The lighting is provided by street lamps and building interior lights.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban residential street\",\n    \"lane_layout\": \"likely two-lane\",\n    \"lane_markings\": \"not visible due to snow and obstruction\",\n    \"traffic_signals\": \"none visible\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"street lamps, building lights\",\n    \"weather\": \"heavy snow/fog, low visibility, lens obscuration\"\n  },\n  \"dynamic_agents\": [\n    {\n      \"type\": \"vehicle\",\n      \"position\": \"center-background, distant\",\n      \"status\": \"moving or stationary\",\n      \"description\": \"blurred red and white lights indicating a vehicle ahead\"\n    }\n  ],\n  \"prediction\": [\n    {\n      \"agent\": \"distant_vehicle\",\n      \"likely_behavior\": \"The vehicle will likely continue moving at a slow speed or stop due to poor visibility.\",\n      \"reasoning\": \"Low visibility and snowy conditions typically cause slower traffic in urban environments.\"\n    }\n  ],\n  \"planning\": {\n    \"action\": \"Slow down significantly or pull over/stop.\",\n    \"reasoning\": \"The visibility is critically low due to lens obscuration and weather conditions, making safe navigation impossible at current speeds. The priority is safety and visibility.\"\n  },\n  \"region_inference\": \"Europe (likely Northern or Central Europe)\",\n  \"reasoning\": \"The architectural style of the multi-story buildings, the design of the street lamps, and the heavy winter conditions are consistent with European urban settings.\"\n}\n```",
+      "valid_json": false
+    },
+    {
+      "frame_id": 1,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_001.jpg",
+      "latency_s": 258.286,
+      "out_tokens": 512,
+      "tok_per_s": 1.98,
+      "tokens_per_forward": 17.0,
+      "output": "```json\n{\n  \"scene_description\": \"A nighttime scene on a residential or urban street under heavy fog and snowy conditions. The road surface is covered in snow/ice, significantly reducing visibility. There are multi-story residential buildings on both sides of the street. Bare winter trees line the sidewalk. The view is captured with a fisheye lens, creating a curved distortion at the horizon edges.\",\n  \"traffic_elements\": {\n    \"road_type\": \"residential street\",\n    \"lane_layout\": \"undelineated due to snow cover\",\n    \"lane_markings\": \"not visible due to snow and fog\",\n    \"traffic_signals\": \"none visible\",\n    \"signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"street lamps and building window lights\",\n    \"weather\": \"heavy fog, snowy, icy, nighttime\"\n  },\n  \"dynamic_agents\": [\n    {\n      \"type\": \"vehicle\",\n      \"position\": \"center-background, distant ahead\",\n      \"status\": \"stationary or moving slowly\",\n      \"description\": \"red taillights and white headlights visible through the fog\"\n    }\n  ],\n  \"prediction\": [\n    {\n      \"agent\": \"distant vehicle\",\n      \"behavior\": \"likely to continue moving very slowly or stop\",\n      \"reasoning\": \"extreme low visibility and icy road conditions necessitate very low speeds for all traffic.\"\n    }\n  ],\n  \"planning\": {\n    \"ego_action\": \"reduce speed significantly, pull over safely, or maintain a maximum following distance\",\n    \"rule_reason\": \"visibility is critically impaired by fog, and the road surface is hazardous (low traction). Safety priority is to avoid collisions and sliding.\"\n  },\n  \"region_inference\": {\n    \"country\": \"Northern Europe (likely Germany or neighboring country)\",\n    \"reasoning\": \"The architectural style of the multi-story residential buildings with gabled roofs, the type of street lighting, and the overall winter environment are consistent with Northern European urban settings.\"\n  },\n  \"reasoning\": \"The scene presents a high-risk driving environment. The primary challenges are the lack of visibility due to fog and the lack of traction due to snow/ice. The ego vehicle must operate with extreme caution.\"\n}\n```",
+      "valid_json": false
+    }
+  ],
+  "summary": {
+    "load_time_s": 2.1,
+    "n_samples": 2,
+    "n_in_avg": 1,
+    "avg_latency_s": 258.286,
+    "avg_out_tokens": 512.0,
+    "avg_tok_per_s": 1.98,
+    "avg_tokens_per_forward": 17.0,
+    "valid_json_rate": 0.0,
+    "total_wall_s": 525.3
+  },
+  "note": "bf16 with accelerate CPU offload (offloaded=True); 26B (~49GB) does NOT fit on 46GB L40S and bnb can't quantize its MoE experts. LATENCY IS NOT HARDWARE-COMPARABLE (offload-bound)."
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "frame_path": "demo_00.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  },
+  {
+    "id": 1,
+    "frame_path": "demo_01.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  },
+  {
+    "id": 2,
+    "frame_path": "demo_02.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  },
+  {
+    "id": 3,
+    "frame_path": "demo_03.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  },
+  {
+    "id": 4,
+    "frame_path": "demo_04.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  },
+  {
+    "id": 5,
+    "frame_path": "demo_05.jpg",
+    "source": "culturaldrive-demo",
+    "kind": "demo"
+  }
+]

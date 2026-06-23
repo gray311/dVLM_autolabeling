@@ -1,0 +1,870 @@
+{
+  "model": "Nemotron-Diffusion-VLM-8B (FastAPI diffusion)",
+  "prompt": "You are an expert autonomous-driving scene annotator building a reasoning dataset. Analyse this front-camera frame and produce a detailed, structured annotation. Reason step by step in three stages.\n\n1. PERCEPTION: Describe the road type, lane layout, lane markings, traffic signals/signs, crosswalks, lighting and weather, and every important traffic participant (vehicles, pedestrians, cyclists) with its position.\n2. PREDICTION: For the key participants, state their likely short-term behaviour over the next few seconds and why.\n3. PLANNING: State what the ego vehicle should do next and the rule/reason behind it.\nAlso infer the country/region from the road infrastructure, signage and driving side, and justify it.\n\nReturn ONLY a JSON object with these keys: \"scene_description\", \"traffic_elements\", \"dynamic_agents\", \"prediction\", \"planning\", \"region_inference\", \"reasoning\".",
+  "max_new_tokens": 512,
+  "n_frames": 50,
+  "samples": [
+    {
+      "frame_id": 0,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_000.jpg",
+      "latency_s": 7.417,
+      "out_tokens": 384,
+      "tok_per_s": 51.78,
+      "tokens_per_forward": 1.627,
+      "output": "```json\n{\n  \"scene_description\": \"The scene shows a street view at night with a focus on a vehicle's windshield. The road is wet, indicating recent rain, and there are streetlights illuminating the area. There are no visible traffic signals or signs, and the road is devoid of any lane markings. The sky is dark, suggesting it is late evening or night. The reflection in the windshield is blurred, making it difficult to discern specific details about the surrounding environment.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban\",\n    \"lane_layout\": \"Multiple lanes\",\n    \"lane_markings\": \"None visible\",\n    \"traffic_signs\": \"None visible\",\n    \"crosswalks\": \"None visible\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Wet road, indicating recent rain\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"None visible\",\n    \"pedestrians\": \"None visible\",\n    \"cyclists\": \"None visible\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"None visible\",\n    \"pedestrians\": \"None visible\",\n    \"cyclists\": \"None visible\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Should proceed with caution due to wet road conditions\"\n  },\n  \"region_inference\": \"The region cannot be determined from the image alone.\",\n  \"reasoning\": \"The wet road conditions suggest recent rain, which can affect driving conditions. The absence of traffic signals and signs indicates that this may be a less busy area. The presence of streetlights suggests that the area is lit during nighttime. The reflection in the windshield is blurred, making it difficult to discern specific details about the surrounding environment.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 236,
+        "latency_s": 7.32
+      }
+    },
+    {
+      "frame_id": 1,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_001.jpg",
+      "latency_s": 5.245,
+      "out_tokens": 352,
+      "tok_per_s": 67.11,
+      "tokens_per_forward": 1.668,
+      "output": "```json\n  \"scene_description\": \"A street scene at night with a snowy ground, bare trees, and a row of houses. The sky is dark, and the streetlights are on.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights are on\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"No visible vehicles\",\n    \"pedestrians\": \"No visible pedestrians\",\n    \"cyclists\": \"No visible cyclists\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"No vehicles expected to appear\",\n    \"pedestrians\": \"No pedestrians expected to appear\",\n    \"cyclists\": \"No cyclists expected to appear\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"The ego vehicle should maintain a safe distance from the curb and be prepared for any sudden stops.\"\n  },\n  \"region_inference\": \"The scene is likely in a region with a cold climate, possibly in North America or Europe, given the snow and the architecture of the houses.\",\n  \"reasoning\": \"The absence of traffic and the snowy conditions suggest that it is a quiet, possibly residential area during a cold season. The ego vehicle should be cautious due to the slippery road conditions.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 211,
+        "latency_s": 5.2
+      }
+    },
+    {
+      "frame_id": 2,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_002.jpg",
+      "latency_s": 4.329,
+      "out_tokens": 384,
+      "tok_per_s": 88.7,
+      "tokens_per_forward": 2.246,
+      "output": "```json\n{\n  \"scene_description\": \"A city street scene with multiple street signs, traffic lights, and buildings. The weather is foggy, and the road is wet.\",\n  \"traffic_elements\": [\n    {\n      \"type\": \"street_sign\",\n      \"value\": \"40\",\n      \"position\": {x: 0.55, y: 0.45}\n    },\n    {\n      \"type\": \"traffic_light\",\n      \"value\": \"red\",\n      \"position\": {x: 0.55, y: 0.45}\n    },\n    {\n      \"type\": \"traffic_light\",\n      \"value\": \"green\",\n      \"position\": {x: 0.55, y: 0.45}\n    }\n  ],\n  \"dynamic_agents\": [\n    {\n      \"type\": \"vehicle\",\n      \"value\": \"car\",\n      \"position\": {x: 0.55, y: 0.45}\n    }\n  ],\n  \"prediction\": [\n    {\n      \"type\": \"vehicle\",\n      \"value\": \"car\",\n      \"position\": {x: 0.55, y: 0.45}\n    }\n  ],\n  \"planning\": [\n    {\n      \"type\": \"vehicle\",\n      \"value\": \"car\",\n      \"position\": {x: 0.55, y: 0.45}\n    }\n  ],\n  \"region_inference\": \"Europe\",\n  \"reasoning\": \"The street signs, traffic lights, and driving side suggest a European country. The foggy weather and wet road indicate recent rain.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 171,
+        "latency_s": 4.3
+      }
+    },
+    {
+      "frame_id": 3,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_003.jpg",
+      "latency_s": 7.524,
+      "out_tokens": 480,
+      "tok_per_s": 63.79,
+      "tokens_per_forward": 1.611,
+      "output": "```json\n{\n  \"scene_description\": \"The scene shows a street view during twilight with a snowy environment. The sky is dark, indicating either early morning or late evening. There are buildings on both sides of the street, and the trees are bare, suggesting it might be winter. The street is covered with snow, and there are no visible lane markings due to the snow. There are streetlights on, providing illumination. There are no visible traffic signals or signs, and there are no crosswalks. The weather appears to be cloudy and cold.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"two-lane street\",\n    \"lane_markings\": \"none\",\n    \"traffic_signs\": \"none\",\n    \"crosswalks\": \"none\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy and cloudy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": {\n      \"action\": \"stand still\",\n      \"reason\": \"no traffic present\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"region\": \"Northeastern United States\",\n    \"justification\": \"The presence of snow and the architecture of the buildings suggest a region with a cold climate, such as the Northeastern United States.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is calm with no visible traffic or pedestrians. The snow-covered ground and bare trees suggest a winter setting.\",\n    \"prediction\": \"Given the absence of traffic and pedestrians, the ego vehicle is likely to remain stationary.\",\n    \"planning\": \"The ego vehicle should remain stationary as there is no immediate traffic or pedestrian activity.\",\n    \"region_inference\": \"The region is inferred to be the Northeastern United States based on the architectural style of the buildings and the weather conditions.\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 480,
+        "total_tokens": 2169,
+        "nfe": 298,
+        "latency_s": 7.49
+      }
+    },
+    {
+      "frame_id": 4,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_004.jpg",
+      "latency_s": 4.426,
+      "out_tokens": 320,
+      "tok_per_s": 72.3,
+      "tokens_per_forward": 1.808,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with illuminated streetlights and a building in the background.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Paved\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Double yellow lines\",\n    \"traffic_signs\": \"No visible signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": {\n      \"action\": \"Continue straight\",\n      \"reason\": \"No traffic signs or obstacles\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"justification\": \"Two-lane streets with double yellow lines are common in the United States.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is calm with no immediate traffic or pedestrians.\",\n    \"prediction\": \"The ego vehicle will continue straight as there are no obstacles.\",\n    \"planning\": \"The ego vehicle should maintain its current path.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 177,
+        "latency_s": 4.4
+      }
+    },
+    {
+      "frame_id": 5,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_005.jpg",
+      "latency_s": 5.027,
+      "out_tokens": 352,
+      "tok_per_s": 70.02,
+      "tokens_per_forward": 1.743,
+      "output": "```json\n{\n  \"scene_description\": \"The scene shows a street view at night with a snowy environment. The road is covered with snow, and there are lane markings on the road. There are streetlights illuminating the area, and there are buildings in the background. The sky is dark, indicating it is nighttime.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban\",\n    \"lane_layout\": \"two-lane\",\n    \"lane_markings\": \"white lane markings\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"none visible\",\n    \"pedestrians\": \"none visible\",\n    \"cyclists\": \"none visible\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"none visible\",\n    \"pedestrians\": \"none visible\",\n    \"cyclists\": \"none visible\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"none visible\",\n    \"rule\": \"none applicable\",\n    \"reason\": \"none applicable\"\n  },\n  \"region_inference\": {\n    \"country\": \"European country\",\n    \"justification\": \"The road infrastructure, signage, and driving side suggest it is in a European country.\"\n  },\n  \"reasoning\": {\n    \"step\": \"The scene is taken at night in a snowy environment with no visible traffic participants. The road infrastructure and driving side suggest it is in a European country.\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 202,
+        "latency_s": 5.0
+      }
+    },
+    {
+      "frame_id": 6,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_006.jpg",
+      "latency_s": 6.606,
+      "out_tokens": 416,
+      "tok_per_s": 62.97,
+      "tokens_per_forward": 1.552,
+      "output": "```json\n{\n  \"scene_description\": \"The image shows a nighttime street scene with a focus on a streetlight. The sky is dark, indicating it is either late evening or early morning. The streetlight is illuminated, casting a warm glow on the surroundings. The street appears to be quiet with no visible vehicles or pedestrians. The architecture of the buildings and the design of the streetlight suggest a residential or suburban setting.\",\n  \"traffic_elements\": {\n    \"streetlight\": {\n      \"type\": \"streetlight\",\n      \"position\": \"center of the image\",\n      \"status\": \"on\",\n      \"light\": \"white\"\n    }\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"region_inference\": {\n    \"country\": \"USA\",\n    \"region\": \"Midwest\",\n    \"justification\": \"The architecture of the buildings and the design of the streetlight are typical of residential or suburban areas in the Midwest of the United States.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is calm and quiet, with no visible traffic or pedestrians. The streetlight is the main source of light, suggesting it is nighttime. The architecture of the buildings and the design of the streetlight suggest a residential or suburban setting in the Midwest of the United States.\",\n    \"prediction\": \"Given the lack of visible traffic or pedestrians, it is likely that the scene will remain calm and quiet for the next few seconds.\",\n    \"planning\": \"Since there are no other vehicles or pedestrians, the ego vehicle should continue on its current path without any immediate changes in direction.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 268,
+        "latency_s": 6.57
+      }
+    },
+    {
+      "frame_id": 7,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_007.jpg",
+      "latency_s": 5.417,
+      "out_tokens": 384,
+      "tok_per_s": 70.89,
+      "tokens_per_forward": 1.77,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a snowy road, streetlights, and a neon sign.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Paved\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Neon sign with a circular design\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights and neon sign\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"One car visible in the distance\",\n    \"pedestrians\": \"No visible pedestrians\",\n    \"cyclists\": \"No visible cyclists\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"The car will continue to move along the road\",\n    \"pedestrians\": \"No visible pedestrians\",\n    \"cyclists\": \"No visible cyclists\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"The car should maintain a safe distance from the other car\",\n    \"rule\": \"Maintain a safe distance from other vehicles\"\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"justification\": \"Based on the road infrastructure, signage, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is clear with visible road markings and streetlights\",\n    \"prediction\": \"The car will continue to move along the road\",\n    \"planning\": \"The car should maintain a safe distance from the other car\",\n    \"region_inference\": \"The scene is in the United States\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 217,
+        "latency_s": 5.37
+      }
+    },
+    {
+      "frame_id": 8,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_008.jpg",
+      "latency_s": 6.018,
+      "out_tokens": 384,
+      "tok_per_s": 63.81,
+      "tokens_per_forward": 1.574,
+      "output": "```json\n  \"scene_description\": \"The scene shows a street view at night with a car's perspective in the foreground. The road is wet, indicating recent rain. There are streetlights, a building with a sign that reads 'CAFE', and a few trees without leaves, suggesting it might be autumn or winter. The sky is dark, and the overall lighting is dim.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"two-lane street\",\n    \"lane_markings\": \"visible lane markings\",\n    \"traffic_signs\": \"streetlights, building sign\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights, ambient light\",\n    \"weather\": \"wet, rainy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"car in the foreground\",\n    \"pedestrians\": \"none visible\",\n    \"cyclclists\": \"none visible\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"car will continue moving forward\",\n    \"pedestrians\": \"none visible\",\n    \"cyclclists\": \"none visible\"\n  },\n  \"planning\": {\n    \"vehicles\": \"car should maintain a safe distance\",\n    \"pedestrians\": \"none visible\",\n    \"cyclclists\": \"none visible\"\n  },\n  \"region_inference\": \"The scene appears to be in a European country, given the road infrastructure, signage, and driving side.\",\n  \"reasoning\": \"The wet road and dim lighting suggest recent rain. The absence of pedestrians and cyclists indicates it might be late at night. The car's position and movement suggest it is maintaining a safe distance on the road.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 244,
+        "latency_s": 5.98
+      }
+    },
+    {
+      "frame_id": 9,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_009.jpg",
+      "latency_s": 5.572,
+      "out_tokens": 352,
+      "tok_per_s": 63.17,
+      "tokens_per_forward": 1.558,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a building on the left and trees on the right. The sky is dark blue, and the visibility is low due to the snow.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"two-lane road\",\n    \"lane_markings\": \"no lane markings\",\n    \"traffic_signs\": \"no visible traffic signs\",\n    \"crosswalks\": \"no visible crosswalks\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"vego_vehicle\": \"a car in the foreground\",\n      \"other_vehicles\": \"a car in the background\"\n    },\n    \"pedestrians\": \"no visible pedestrians\",\n    \"cyclists\": \"no visible cyclists\"\n  },\n  \"prediction\": {\n    \"vego_vehicle\": \"will continue to move forward\",\n    \"other_vehicles\": \"will continue to move\"\n  },\n  \"planning\": {\n    \"vego_vehicle\": \"should maintain a safe distance from the other vehicle\",\n    \"other_vehicles\": \"should maintain a safe distance from the vego vehicle\"\n  },\n  \"region_inference\": \"likely in a country with a snowy climate, such as Canada or Russia\",\n  \"reasoning\": \"The presence of snow and the lack of lane markings suggest a snowy climate. The driving side is not visible, but the presence of a car in the foreground suggests a right-hand traffic system.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 226,
+        "latency_s": 5.54
+      }
+    },
+    {
+      "frame_id": 10,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_010.jpg",
+      "latency_s": 6.083,
+      "out_tokens": 384,
+      "tok_per_s": 63.13,
+      "tokens_per_forward": 1.555,
+      "output": "```json\n{\n  \"scene_description\": \"The scene depicts a nighttime urban setting with a focus on a street view. The road is wet, likely due to recent rain, and the visibility is reduced by the lighting conditions. There are multiple streetlights illuminating the area, and the sky is dark, indicating it is late evening or night. The road is marked with white lines, and there is a crosswalk visible in the foreground. The weather is foggy, which adds to the reduced visibility.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"two-lane road\",\n    \"lane_markings\": \"white lines\",\n    \"traffic_signs\": \"crosswalk\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"foggy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"none visible\",\n    \"pedestrians\": \"none visible\",\n    \"cyclists\": \"none visible\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"none predicted\",\n    \"pedestrians\": \"none predicted\",\n    \"cyclists\": \"none predicted\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"should maintain safe distance from crosswalk\",\n    \"rule\": \"yield to pedestrians\"\n  },\n  \"region_inference\": {\n    \"country\": \"not determinable from image alone\",\n    \"justification\": \"no distinctive signage or driving side visible\"\n  },\n  \"reasoning\": {\n    \"perception\": \"observed wet road, street lights, crosswalk, foggy conditions\",\n    \"prediction\": \"no visible traffic, but reduced visibility\",\n    \"planning\": \"ego vehicle should be cautious due to foggy conditions\"\n  }\n}\n```\nThis annotation provides a detailed description of the scene",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 247,
+        "latency_s": 6.05
+      }
+    },
+    {
+      "frame_id": 11,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_011.jpg",
+      "latency_s": 4.994,
+      "out_tokens": 352,
+      "tok_per_s": 70.49,
+      "tokens_per_forward": 1.76,
+      "output": "```json\n  \"scene_description\": \"A nighttime street scene with a wet road, streetlights, and a white building in the background.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Wet road, suggesting recent rain\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"No visible vehicles\",\n    \"pedestrians\": \"No visible pedestrians\",\n    \"cyclists\": \"No visible cyclists\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"No vehicles expected to appear anytime soon\",\n    \"pedestrians\": \"No pedestrians expected to appear anytime soon\",\n    \"cyclists\": \"No cyclists expected to appear anytime soon\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Should maintain a safe distance from the wet road\",\n    \"rule\": \"Increase following distance on wet roads\"\n  },\n  \"region_inference\": {\n    \"region\": \"Urban area in a developed country\",\n    \"justification\": \"Presence of streetlights, lane markings, and a white building\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The road is wet, indicating recent rain\",\n    \"prediction\": \"No immediate traffic expected\",\n    \"planning\": \"Safety first, increase following distance\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 200,
+        "latency_s": 4.96
+      }
+    },
+    {
+      "frame_id": 12,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_012.jpg",
+      "latency_s": 5.084,
+      "out_tokens": 352,
+      "tok_per_s": 69.24,
+      "tokens_per_forward": 1.725,
+      "output": "```json\n  \"scene_description\": \"A nighttime street scene with a wet road, illuminated by streetlights, and a white building in the background.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Double yellow lines\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Wet road, indicating recent rain\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"No visible vehicles\",\n    \"pedestrians\": \"No visible pedestrians\",\n    \"cyclists\": \"No visible cyclists\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"No vehicles expected in the next few seconds\",\n    \"pedestrians\": \"No pedestrians expected in the next few seconds\",\n    \"cyclists\": \"No cyclists expected in the next few seconds\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"The ego vehicle should proceed with caution due to the wet road conditions.\",\n    \"rule\": \"Maintain a safe distance from other vehicles and pedestrians.\",\n    \"reason\": \"Wet roads can reduce traction and increase stopping distances.\"\n  },\n  \"region_inference\": \"The scene is likely in a country where driving is on the right side of the road, such as the United States or the United Kingdom.\",\n  \"reasoning\": \"The absence of visible traffic and the presence of streetlights suggest a quiet, possibly residential area.\"\n\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 204,
+        "latency_s": 5.05
+      }
+    },
+    {
+      "frame_id": 13,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_013.jpg",
+      "latency_s": 5.867,
+      "out_tokens": 416,
+      "tok_per_s": 70.9,
+      "tokens_per_forward": 1.755,
+      "output": "```json\n  \"scene_description\": \"A nighttime street scene with a wet road, illuminated by streetlights. A white building is visible in the background, and a red traffic light is seen in the foreground.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Wet road\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Red traffic light\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Wet conditions\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"red_light\": {\n        \"position\": \"Foreground, red traffic light\"\n      }\n    },\n    \"pedestrians\": {\n      \"position\": \"No visible pedestrians\"\n    },\n    \"cyclists\": {\n      \"position\": \"No visible cyclists\"\n    }\n  },\n  \"prediction\": {\n    \"red_light\": {\n      \"behaviour\": \"Will remain red\"\n    }\n  },\n  \"planning\": {\n    \"red_light\": {\n      \"action\": \"Remain red\"\n    }\n  },\n  \"region_inference\": {\n    \"region\": \"North America\",\n    \"justification\": \"Driving on the right side of the road, red traffic light, and road infrastructure\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzed the road type, lane layout, lane markings, traffic signals, crosswalks, lighting, and weather.\",\n    \"prediction\": \"Predicted the behavior of the red traffic light.\",\n    \"planning\": \"Planned the action for the ego vehicle based on the prediction.\",\n    \"region_inference\": \"Inferred the region based on the road infrastructure, signage, and driving side.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 237,
+        "latency_s": 5.84
+      }
+    },
+    {
+      "frame_id": 14,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_014.jpg",
+      "latency_s": 4.36,
+      "out_tokens": 320,
+      "tok_per_s": 73.4,
+      "tokens_per_forward": 1.839,
+      "output": "```json\n  \"scene_description\": \"A nighttime street scene with a single-lane road, a white building in the background, and a traffic light showing a red signal.\",\n  \"traffic_elements\": {\n    \"road_type\": \"single-lane\",\n    \"lane_layout\": \"one lane\",\n    \"lane_markings\": \"none visible\",\n    \"traffic_signs\": \"red traffic light\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlight\",\n    \"weather\": \"nighttime\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"none visible\",\n    \"pedestrians\": \"none visible\",\n    \"cyclists\": \"none visible\"\n  },\n  \"prediction\": {\n    \"traffic_light\": \"will change to green\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"should stop at the red light\"\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"justification\": \"driving on the right side of the road\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The traffic light is red, so the ego vehicle must stop.\",\n    \"prediction\": \"The traffic light will soon change to green.\",\n    \"planning\": \"The ego vehicle should stop at the red light to comply with traffic rules.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 174,
+        "latency_s": 4.32
+      }
+    },
+    {
+      "frame_id": 15,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_015.jpg",
+      "latency_s": 4.997,
+      "out_tokens": 352,
+      "tok_per_s": 70.44,
+      "tokens_per_forward": 1.76,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene with a wet road, a white building, and a bright streetlight.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Wet road\",\n    \"lane_layout\": \"Two-lane\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Bright streetlight\",\n    \"weather\": \"Wet\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Center of the road\",\n        \"type\": \"Sedan\",\n        \"color\": \"Red\",\n        \"state\": \"Moving\"\n      }\n    },\n    \"pedestrians\": {\n      \"person\": {\n        \"position\": \"Sidewalk\",\n        \"type\": \"Adult\",\n        \"color\": \"White\",\n        \"state\": \"Walking\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Continue moving forward\"\n    },\n    \"person\": {\n      \"behavior\": \"Continue walking on the sidewalk\"\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Maintain speed\",\n      \"rule\": \"Follow traffic rules\"\n    },\n    \"person\": {\n      \"action\": \"Cross the street\",\n      \"rule\": \"Use crosswalk\"\n    }\n  },\n  \"region_inference\": \"United States\",\n  \"reasoning\": \"Based on the road infrastructure, signage, and driving side.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 200,
+        "latency_s": 4.96
+      }
+    },
+    {
+      "frame_id": 16,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_016.jpg",
+      "latency_s": 6.051,
+      "out_tokens": 512,
+      "tok_per_s": 84.62,
+      "tokens_per_forward": 2.151,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene of a parking lot with a white building in the background, illuminated by streetlights. The ground is wet, suggesting recent rain.\",\n  \"traffic_elements\": {\n    \"road_type\": \"parking lot\",\n    \"lane_layout\": \"multiple parking spaces\",\n    \"lane_markings\": \"white lines marking parking spaces\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"wet ground\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"vego_vehicle\": \"a car in the foreground\",\n      \"other_vehicles\": \"none visible\"\n    },\n    \"pedestrians\": {\n      \"vego_pedestrian\": \"a person standing near the building\",\n      \"other_pedestrians\": \"none visible\"\n    },\n    \"cyclists\": {\n      \"vego_cyclist\": \"none visible\",\n      \"other_cyclists\": \"none visible\"\n    }\n  },\n  \"prediction\": {\n    \"vego_vehicle\": \"likely to move forward\",\n    \"vego_pedestrian\": \"likely to stand still\",\n    \"vego_cyclist\": \"none visible\"\n  },\n  \"planning\": {\n    \"vego_vehicle\": \"should move forward\",\n    \"vego_pedestrian\": \"should stand still\",\n    \"vego_cyclist\": \"none visible\"\n  },\n  \"region_inference\": {\n    \"region\": \"North America\",\n    \"justification\": \"Based on the road infrastructure, signage, and driving side.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is a parking lot at night with a white building in the background, illuminated by streetlights. The ground is wet, suggesting recent rain.\",\n    \"prediction\": \"The vego vehicle is likely to move forward, and the vego pedestrian is likely to stand still.\",\n    \"planning\": \"The vego vehicle should move forward, and the vego pedestrian should stand still.\",\n    \"region_inference\": \"The region is likely North America based on the road infrastructure, signage, and driving side.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 238,
+        "latency_s": 6.02
+      }
+    },
+    {
+      "frame_id": 17,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_017.jpg",
+      "latency_s": 4.581,
+      "out_tokens": 320,
+      "tok_per_s": 69.85,
+      "tokens_per_forward": 1.749,
+      "output": "```json\n  \"scene_description\": \"Nighttime scene of a parking lot with a white building in the background.\",\n  \"traffic_elements\": {\n    \"road_type\": \"parking lot\",\n    \"lane_layout\": \"Multiple parking spaces\",\n    \"lane_markings\": \"Parking lines\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Nighttime\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclclists\": []\n  },\n  \"planning\": {\n    \"vehicles\": [],\n    \"pedestrians\": [],\n    \"cyclclists\": []\n  },\n  \"region_inference\": {\n    \"region\": \"Unknown\",\n    \"justification\": \"No clear indicators of a specific region\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is a quiet parking lot at night with no visible traffic or pedestrians.\",\n    \"prediction\": \"The scene is likely to remain calm with no significant activity.\",\n    \"planning\": \"The ego vehicle should remain stationary in its parking space.\",\n    \"region_inference\": \"The region cannot be determined from the available information.\"\n  }\n}\n```\n\nThis annotation provides a detailed description of the scene",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 183,
+        "latency_s": 4.55
+      }
+    },
+    {
+      "frame_id": 18,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_018.jpg",
+      "latency_s": 5.188,
+      "out_tokens": 384,
+      "tok_per_s": 74.01,
+      "tokens_per_forward": 1.846,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene in a parking lot with two individuals and a parked car.\",\n  \"traffic_elements\": {\n    \"road_type\": \"parking lot\",\n    \"lane_layout\": \"No defined lanes\",\n    \"lane_markings\": \"No lane markings\",\n    \"traffic_signs\": \"No traffic signs\",\n    \"crosswalks\": \"No crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Nighttime\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Far right side\",\n        \"state\": \"parked\"\n      }\n    },\n    \"pedestrians\": {\n      \"person1\": {\n        \"position\": \"Left side\",\n        \"state\": \"walking\"\n      },\n      \"person2\": {\n        \"position\": \"Center\",\n        \"state\": \"walking\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"person1\": {\n      \"behavior\": \"Continue walking towards the building\"\n    },\n    \"person2\": {\n      \"behavior\": \"Continue walking towards the building\"\n    }\n  },\n  \"planning\": {\n    \"ego_vehicle\": {\n      \"action\": \"Stay stationary\",\n      \"rule\": \"No immediate traffic activity\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"Unknown\",\n    \"justification\": \"No distinctive signage or driving side indicators\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Identified key participants and their states\",\n    \"prediction\": \"Assumed walking direction based on context\",\n    \"planning\": \"Decided on stationary action due to lack of traffic\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 208,
+        "latency_s": 5.16
+      }
+    },
+    {
+      "frame_id": 19,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_019.jpg",
+      "latency_s": 6.777,
+      "out_tokens": 480,
+      "tok_per_s": 70.83,
+      "tokens_per_forward": 1.752,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene on a wet road with a person walking in the center, illuminated by streetlights. There is a white building in the background and a car on the right side of the road.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Wet asphalt road\",\n    \"lane_layout\": \"Two-lane road with a central dividing line\",\n    \"lane_markings\": \"Visible lane markings on the road\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights providing illumination\",\n    \"weather\": \"Rainy or wet conditions\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Right side of the road\",\n        \"type\": \"Sedan\",\n        \"state\": \"Stationary\"\n      }\n    },\n    \"pedestrians\": {\n      \"person\": {\n        \"position\": \"Center of the road\",\n        \"state\": \"Walking\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Remains stationary\",\n      \"reason\": \"No visible traffic signals or signs\"\n    },\n    \"person\": {\n      \"behavior\": \"Continues walking\",\n      \"reason\": \"No obstacles in the path\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Remains stationary\",\n      \"rule\": \"No visible traffic signals or signs\"\n    },\n    \"person\": {\n      \"action\": \"Continues walking\",\n      \"rule\": \"No obstacles in the path\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"USA\",\n    \"justification\": \"Two-lane road with a central dividing line, sedan car, and driving side\"\n  },\n  \"reasoning\": {\n    \"description\": \"The road is wet, indicating recent rain. The car is stationary, and the person is walking across the road. The absence of traffic signals or signs suggests a less busy area. The region is inferred based on the road layout and vehicle type.\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 480,
+        "total_tokens": 2169,
+        "nfe": 274,
+        "latency_s": 6.75
+      }
+    },
+    {
+      "frame_id": 20,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_020.jpg",
+      "latency_s": 5.598,
+      "out_tokens": 384,
+      "tok_per_s": 68.59,
+      "tokens_per_forward": 1.707,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene with a person walking on a wet road, illuminated by streetlights.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban road\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Wet road, indicating recent rain\"\n  },\n  \"dynamic_agents\": {\n    \"pedestrians\": \"One person walking on the road\",\n    \"vehicles\": \"No visible vehicles\",\n    \"cyclicists\": \"No visible cyclists\"\n  },\n  \"prediction\": {\n    \"pedestrians\": \"The person will continue walking on the road\",\n    \"vehicles\": \"No vehicles are present\",\n    \"cyclicists\": \"No cyclists are present\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Not applicable, as there is no ego vehicle in the scene\"\n  },\n  \"region_inference\": {\n    \"region\": \"Urban area, possibly in a country with right-hand traffic\",\n    \"justification\": \"Based on the road layout and the direction of the person walking\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The road is wet, indicating recent rain, and the person is walking on it.\",\n    \"prediction\": \"The person will continue walking on the road.\",\n    \"planning\": \"Not applicable, as there is no ego vehicle in the scene.\",\n    \"region_inference\": \"The region is likely an urban area with right-hand traffic.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 225,
+        "latency_s": 5.57
+      }
+    },
+    {
+      "frame_id": 21,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_021.jpg",
+      "latency_s": 5.027,
+      "out_tokens": 352,
+      "tok_per_s": 70.02,
+      "tokens_per_forward": 1.743,
+      "output": "```json\n  \"scene_description\": \"A nighttime scene of a parking lot with a white building in the background, illuminated by streetlights.\",\n  \"traffic_elements\": {\n    \"road_type\": \"parking lot\",\n    \"lane_layout\": \"multiple parking lanes\",\n    \"lane_markings\": \"white lines\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"nighttime\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"cars\": {\n        \"position\": \"right side of the image\"\n      }\n    },\n    \"pedestrians\": {\n      \"position\": \"left side of the image\"\n    }\n  },\n  \"prediction\": {\n    \"vehicles\": {\n      \"cars\": {\n        \"behavior\": \"parking or stationary\"\n      }\n    },\n    \"pedestrians\": {\n      \"behavior\": \"walking or standing\"\n    }\n  },\n  \"planning\": {\n    \"ego_vehicle\": {\n      \"action\": \"parking or stationary\"\n    }\n  },\n  \"region_inference\": {\n    \"region\": \"North America\",\n    \"justification\": \"driving side and road infrastructure\"\n  },\n  \"reasoning\": {\n    \"steps\": \"1. Identify road type and layout\\n2. Observe traffic elements and participants\\n3. Predict short-term behavior of agents\\n4. Plan next action for ego vehicle\\n5. Infer the region based on road infrastructure\"\n  }\n}\n```\n\n\n</think>",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 202,
+        "latency_s": 5.0
+      }
+    },
+    {
+      "frame_id": 22,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_022.jpg",
+      "latency_s": 3.663,
+      "out_tokens": 320,
+      "tok_per_s": 87.37,
+      "tokens_per_forward": 2.238,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with trees on both sides.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Paved\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible signs\",\n    \"crosswalks\": \"No crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"vego_vehicle\": \"Not visible\",\n      \"other_vehicles\": \"Not visible\"\n    },\n    \"pedestrians\": \"Not visible\",\n    \"cyclists\": \"Not visible\"\n  },\n  \"prediction\": {\n    \"vego_vehicle\": \"Not applicable\",\n    \"other_vehicles\": \"Not applicable\",\n    \"pedestrians\": \"Not applicable\",\n    \"cyclists\": \"Not applicable\"\n  },\n  \"planning\": {\n    \"vego_vehicle\": \"Not applicable\",\n    \"other_vehicles\": \"Not applicable\",\n    \"pedestrians\": \"Not applicable\",\n    \"cyclists\": \"Not applicable\"\n  },\n  \"region_inference\": {\n    \"region\": \"Not applicable\",\n    \"justification\": \"Not applicable\"\n  },\n  \"reasoning\": {\n    \"reasoning\": \"Not applicable\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 143,
+        "latency_s": 3.63
+      }
+    },
+    {
+      "frame_id": 23,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_023.jpg",
+      "latency_s": 7.123,
+      "out_tokens": 480,
+      "tok_per_s": 67.39,
+      "tokens_per_forward": 1.661,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a bright streetlight shining on the snow-covered road. There are snow-covered trees on both sides of the road and a few parked cars on the side.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban\",\n    \"lane_layout\": \"two-lane\",\n    \"lane_markings\": \"dashed lines\",\n    \"traffic_signs\": [],\n    \"crosswalks\": [],\n    \"lighting\": \"streetlight\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"ego vehicle\": {\n        \"type\": \"car\",\n        \"position\": \"center of the road\",\n        \"orientation\": \"facing\"\n      },\n      \"other vehicles\": {\n        \"type\": \"car\",\n        \"position\": \"parked on the side of the road\",\n        \"orientation\": \"facing\"\n      }\n    },\n    \"pedestrians\": [],\n    \"cyclrists\": []\n  },\n  \"prediction\": {\n    \"ego vehicle\": {\n      \"behavior\": \"straight ahead\",\n      \"reason\": \"no visible traffic\"\n    },\n    \"other vehicles\": {\n      \"behavior\": \"no movement\",\n      \"reason\": \"parked\"\n    }\n  },\n  \"planning\": {\n    \"ego vehicle\": {\n      \"action\": \"continue forward\",\n      \"rule\": \"clear road ahead\"\n    },\n    \"other vehicles\": {\n      \"action\": \"no movement\",\n      \"rule\": \"parked\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"USA\",\n    \"region\": \"Midwest\",\n    \"justification\": \"dashed lane markings, snow-covered trees, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The road is clear with no visible traffic, and the weather is snowy.\",\n    \"prediction\": \"The ego vehicle will continue straight ahead while the other vehicles remain parked.\",\n    \"planning\": \"The ego vehicle should continue forward given the clear road ahead, and the other vehicles should remain parked.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 480,
+        "total_tokens": 2169,
+        "nfe": 289,
+        "latency_s": 7.08
+      }
+    },
+    {
+      "frame_id": 24,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_024.jpg",
+      "latency_s": 5.016,
+      "out_tokens": 352,
+      "tok_per_s": 70.17,
+      "tokens_per_forward": 1.751,
+      "output": "```json\n  \"scene_description\": \"A snowy urban street at night with parked cars and well-lit trees.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban\",\n    \"lane_layout\": \"two-lane\",\n    \"lane_markings\": \"dashed lines\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"position\": \"parked on the left side of the road\"\n      }\n    ],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"behaviour\": \"remain stationary\"\n      }\n    ],\n    \"pedestrians\": [],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\n        \"type\": \"car\",\n        \"action\": \"drive straight\",\n        \"rule\": \"follow lane markings\"\n      }\n    ]\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"justification\": \"dashed lane markings, right-hand traffic\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Observed parked cars, streetlights, and snowy conditions.\",\n    \"prediction\": \"Cars are stationary, no pedestrians or cyclists.\",\n    \"planning\": \"Ego vehicle should drive straight following lane markings.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 201,
+        "latency_s": 4.98
+      }
+    },
+    {
+      "frame_id": 25,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_025.jpg",
+      "latency_s": 5.207,
+      "out_tokens": 352,
+      "tok_per_s": 67.6,
+      "tokens_per_forward": 1.676,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a bright streetlight, snow-covered trees, and a parked car on the side.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlight illuminating the scene\",\n    \"weather\": \"Snowy conditions\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Parked on the side of the road\",\n        \"type\": \"Sedan\"\n      }\n    },\n    \"pedestrians\": [],\n    \"cyclicists\": []\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behaviour\": \"Parked, stationary on the road\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Stay parked\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"region\": \"Northeastern United States\",\n    \"justification\": \"Snowy conditions and urban infrastructure\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is calm with no active traffic.\",\n    \"prediction\": \"The car is parked and will not move.\",\n    \"planning\": \"The car should remain parked.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 210,
+        "latency_s": 5.17
+      }
+    },
+    {
+      "frame_id": 26,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_026.jpg",
+      "latency_s": 5.276,
+      "out_tokens": 352,
+      "tok_per_s": 66.72,
+      "tokens_per_forward": 1.653,
+      "output": "```json\n  \"scene_description\": \"A snowy urban street at night with streetlights and trees.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Paved\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible signs\",\n    \"crosswalks\": \"No crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Center of the road\",\n        \"type\": \"Car\"\n      }\n    },\n    \"pedestrians\": {},\n    \"cyclicists\": {}\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Continuing to move forward\",\n      \"reason\": \"No obstructions\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Move forward\",\n      \"rule\": \"Follow traffic flow\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"European country\",\n    \"region\": \"Urban area\",\n    \"justification\": \"Paved roads, streetlights, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Identified road type, lane layout, and weather conditions.\",\n    \"prediction\": \"Predicted car behavior based on road conditions.\",\n    \"planning\": \"Planned car action based on traffic rules.\",\n    \"region_inference\": \"Inferred region based on road infrastructure.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 213,
+        "latency_s": 5.24
+      }
+    },
+    {
+      "frame_id": 27,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_027.jpg",
+      "latency_s": 6.815,
+      "out_tokens": 416,
+      "tok_per_s": 61.04,
+      "tokens_per_forward": 1.496,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a car driving on the road, trees covered in snow, and streetlights illuminating the area.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road with a turning lane\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Crosswalk sign and streetlights\",\n    \"crosswalks\": \"Visible crosswalk\",\n    \"lighting\": \"Streetlights illuminating the scene\",\n    \"weather\": \"Snowy conditions\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Driving on the road\",\n        \"type\": \"Sedan\"\n      }\n    },\n    \"pedestrians\": [],\n    \"cyclicists\": []\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Continuing to drive on the road\",\n      \"reason\": \"No immediate obstacles or traffic\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Continue driving\",\n      \"rule\": \"Follow lane markings and traffic signals\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"North America\",\n    \"region\": \"Urban area\",\n    \"justification\": \"Driving on the right side of the road, street infrastructure, and snow conditions\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzing the road type, lane layout, and traffic elements\",\n    \"prediction\": \"Predicting the car's behavior based on the current scene\",\n    \"planning\": \"Planning the car's next action based on traffic rules\",\n    \"region_inference\": \"Inferring the country and region based on road infrastructure and signs\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 278,
+        "latency_s": 6.78
+      }
+    },
+    {
+      "frame_id": 28,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_028.jpg",
+      "latency_s": 7.24,
+      "out_tokens": 512,
+      "tok_per_s": 70.72,
+      "tokens_per_forward": 1.747,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a parked car on the road, a pedestrian walking on the sidewalk, and a building in the background. The road is covered in snow, and the trees are laden with snow. There are street signs and a streetlight illuminating the area.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban\",\n    \"lane_layout\": \"two-lane\",\n    \"lane_markings\": \"dashed white lines\",\n    \"traffic_signs\": [\n      {\n        \"type\": \"parking\",\n        \"position\": \"right\"\n      }\n    ],\n    \"crosswalks\": \"none\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"position\": \"parked on the road\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"person\",\n        \"position\": \"walking on the sidewalk\"\n      }\n    ],\n    \"cyclists\": \"none\"\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"behaviour\": \"remain parked\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"person\",\n        \"behaviour\": \"continue walking\"\n      }\n    ]\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\n        \"type\": \"car\",\n        \"action\": \"remain parked\"\n      }\n    ]\n  },\n  \"region_inference\": {\n    \"country/region\": \"North America\",\n    \"justification\": \"Based on the road infrastructure, signage, and driving side.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is a typical urban street at night with a parked car and a pedestrian walking. The road is covered in snow, and the trees are laden with snow. The street signs and streetlights are visible illuminating the area.\",\n    \"prediction\": \"The car is likely to remain parked, and the pedestrian is likely to continue walking.\",\n    \"planning\": \"The ego vehicle should remain parked as there is no immediate traffic or pedestrian crossing.\",\n    \"region_inference\": \"The scene is likely in North America based on the road infrastructure, signage, and driving side.\"\n  }",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 293,
+        "latency_s": 7.2
+      }
+    },
+    {
+      "frame_id": 29,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_029.jpg",
+      "latency_s": 6.324,
+      "out_tokens": 512,
+      "tok_per_s": 80.97,
+      "tokens_per_forward": 2.024,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a person standing on the sidewalk, cars parked on the side, and snow-covered trees. The scene is illuminated by streetlights and the ground is covered in snow.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban\",\n    \"lane_layout\": \"two-lane\",\n    \"lane_markings\": \"dashed white lines\",\n    \"traffic_signs\": \"stop sign, street sign\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"position\": \"parked on the side of the road\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"person\",\n        \"position\": \"standing on the sidewalk\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"car\",\n        \"behaviour\": \"remain parked stationary\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"person\",\n        \"behaviour\": \"standing on the sidewalk\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\n        \"type\": \"car\",\n        \"action\": \"drive along the road\"\n      }\n    ]\n  },\n  \"region_inference\": {\n    \"country\": \"North America\",\n    \"justification\": \"Based on the road infrastructure, signage, and driving side.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is a snowy urban street at night with a person standing on the sidewalk, cars parked on the side, and snow-covered trees. The scene is illuminated by streetlights and the ground is covered in snow.\",\n    \"prediction\": \"The car will remain parked stationary and the person will remain standing on the sidewalk.\",\n    \"planning\": \"The ego vehicle should drive along the road.\",\n    \"region_inference\": \"The region is likely North America based on the road infrastructure, signage, and driving side.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 253,
+        "latency_s": 6.28
+      }
+    },
+    {
+      "frame_id": 30,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_030.jpg",
+      "latency_s": 5.409,
+      "out_tokens": 416,
+      "tok_per_s": 76.91,
+      "tokens_per_forward": 1.926,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a person walking on the sidewalk, cars parked on the side, and a building in the background.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Crosswalk sign\",\n    \"crosswalks\": \"Visible crosswalk\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Car\",\n        \"position\": \"Parked on the side of the road\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Person\",\n        \"position\": \"Walking on the sidewalk\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Car\",\n        \"behavior\": \"Remains stationary\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Person\",\n        \"behavior\": \"Continues walking\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\n        \"type\": \"Car\",\n        \"action\": \"Remains stationary\"\n      }\n    ]\n  },\n  \"region_inference\": {\n    \"country\": \"Russia\",\n    \"justification\": \"Crosswalk sign and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Observed the snowy street, parked cars, and a person walking.\",\n    \"prediction\": \"Predicted the car remains stationary and the person continues walking.\",\n    \"planning\": \"Planned the car to remain stationary.\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 216,
+        "latency_s": 5.37
+      }
+    },
+    {
+      "frame_id": 31,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_031.jpg",
+      "latency_s": 5.426,
+      "out_tokens": 384,
+      "tok_per_s": 70.77,
+      "tokens_per_forward": 1.761,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a person walking on the sidewalk, a car parked on the street, and a pedestrian crossing sign.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": [\"Pedestrian crossing sign\"],\n    \"crosswalks\": \"Pedestrian crossing\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Parked on the street\"\n      }\n    },\n    \"pedestrians\": {\n      \"person\": {\n        \"position\": \"Walking on the sidewalk\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behaviour\": \"Stay parked\"\n    },\n    \"person\": {\n      \"behaviour\": \"Walking along the sidewalk\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Stay parked\"\n    },\n    \"person\": {\n      \"action\": \"Continue walking\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"Russia\",\n    \"justification\": \"Based on the snowy weather and the style of the pedestrian crossing sign\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzing the street scene for traffic elements and dynamic agents\",\n    \"prediction\": \"Predicting the behavior of vehicles and pedestrians\",\n    \"planning\": \"Determining the appropriate actions for the ego vehicle\",\n    \"region_inference\": \"Inferring the country/region based on visual cues\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 218,
+        "latency_s": 5.39
+      }
+    },
+    {
+      "frame_id": 32,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_032.jpg",
+      "latency_s": 6.067,
+      "out_tokens": 416,
+      "tok_per_s": 68.57,
+      "tokens_per_forward": 1.698,
+      "output": "```json\n  \"scene_description\": \"A snowy street scene at night with a person walking on the sidewalk, a car parked on the street, and a pedestrian crossing sign.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": [\"Pedestrian crossing sign\"],\n    \"crosswalks\": \"Pedestrian crossing\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Snowy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Parked on the street\"\n      }\n    },\n    \"pedestrians\": {\n      \"person\": {\n        \"position\": \"Walking on the sidewalk\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Stay parked\"\n    },\n    \"pedestrian\": {\n      \"behavior\": \"Continue walking\"\n    }\n  },\n  \"planning\": {\n    \"vego\": {\n      \"action\": \"Maintain position\",\n      \"rule\": \"No immediate action needed\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"United States\",\n    \"justification\": \"Driving on the right side of the road, pedestrian crossing sign, and street layout\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzed the road type, lane layout, lane markings, traffic signs, crosswalks, lighting, weather, and dynamic agents.\",\n    \"prediction\": \"Predicted the short-term behavior of the car and pedestrian.\",\n    \"planning\": \"Planned the next action for the ego vehicle.\",\n    \"region_inference\": \"Inferred the country/region based on the road infrastructure, signage, and driving side.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 245,
+        "latency_s": 6.03
+      }
+    },
+    {
+      "frame_id": 33,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_033.jpg",
+      "latency_s": 7.419,
+      "out_tokens": 512,
+      "tok_per_s": 69.01,
+      "tokens_per_forward": 1.701,
+      "output": "```json\n  \"scene_description\": \"A city street with colorful buildings, tram lines, and a wet road surface indicating recent rain.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street with tram in the middle\",\n    \"lane_markings\": \"Visible white lane markings and tram lines\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Streetlights and vehicle lights\",\n    \"weather\": \"Rainy, as indicated by the wet road and person with an umbrella\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": {\n        \"position\": \"Center of the road, moving forward\",\n        \"type\": \"White van\"\n      }\n    },\n    \"pedestrians\": {\n      \"person\": {\n        \"position\": \"Right side of the road, holding an umbrella\",\n        \"type\": \"Person with blue umbrella\"\n      }\n    },\n    \"cyclists\": {\n      \"bike\": {\n        \"position\": \"Right side of the road, near the curb\",\n        \"type\": \"Black bicycle\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"car\": {\n      \"behavior\": \"Continue moving forward down the street\"\n    },\n    \"person\": {\n      \"behavior\": \"Walk along the sidewalk\"\n    },\n    \"bike\": {\n      \"behavior\": \"Ride along the curb\"\n    }\n  },\n  \"planning\": {\n    \"car\": {\n      \"action\": \"Maintain speed and follow traffic flow\"\n    },\n    \"person\": {\n      \"action\": \"Continue walking on the sidewalk\"\n    },\n    \"bike\": {\n      \"action\": \"Continue riding along the curb\"\n    }\n  },\n  \"region_inference\": {\n    \"country\": \"Europe\",\n    \"justification\": \"Urban street layout, tram system, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzed the street layout, traffic participants, and weather conditions.\",\n    \"prediction\": \"Predicted the behavior of vehicles and pedestrians based on the scene.\",\n    \"planning\": \"Planned the next actions for the ego vehicle and other agents.\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 301,
+        "latency_s": 7.38
+      }
+    },
+    {
+      "frame_id": 34,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_034.jpg",
+      "latency_s": 5.877,
+      "out_tokens": 416,
+      "tok_per_s": 70.79,
+      "tokens_per_forward": 1.755,
+      "output": "```json\n{\n  \"scene_description\": \"Urban street scene with tram lines, residential buildings, and a tram.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane street with tram lines\",\n    \"lane_markings\": \"Double yellow lines, tram lines\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"No visible crosswalks\",\n    \"lighting\": \"Street lights, tram lights\",\n    \"weather\": \"Overcast, wet road\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"tram\": {\n        \"position\": \"Center of the road, moving forward\",\n        \"color\": \"Red and white\"\n      }\n    },\n    \"pedestrians\": {},\n    \"cyclclists\": {}\n  },\n  \"prediction\": {\n    \"tram\": {\n      \"behavior\": \"Continue moving forward\",\n      \"reason\": \"Tram is on track, no obstructions\"\n    },\n    \"pedestrians\": {},\n    \"cyclclists\": {}\n  },\n  \"planning\": {\n    \"tram\": {\n      \"action\": \"Continue moving forward\",\n      \"rule\": \"Tram follows track, no stops\"\n    },\n    \"pedestrians\": {},\n    \"cyclclists\": {}\n  },\n  \"region_inference\": {\n    \"region\": \"Europe\",\n    \"justification\": \"Tram lines, building architecture, and road layout are typical of European cities.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Observed tram, road markings, and weather conditions.\",\n    \"prediction\": \"Assumed tram continues forward based on track layout.\",\n    \"planning\": \"Decided tram should continue moving forward as no visible obstructions.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 237,
+        "latency_s": 5.84
+      }
+    },
+    {
+      "frame_id": 35,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_035.jpg",
+      "latency_s": 5.132,
+      "out_tokens": 320,
+      "tok_per_s": 62.36,
+      "tokens_per_forward": 1.546,
+      "output": "```json\n{\n  \"scene_description\": \"A wet urban street with multiple lanes, lane markings, and traffic signals. There are buildings on both sides of the street, and a pedestrian is visible on the sidewalk.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"multi-lane\",\n    \"lane_markings\": \"dashed and solid lines\",\n    \"traffic_signals\": \"traffic lights and signs\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"streetlights\",\n    \"weather\": \"rainy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"car in the nearest lane\",\n    \"pedestrians\": \"one person on the sidewalk\",\n    \"cyclists\": \"none visible\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"car will continue moving forward\",\n    \"pedestrians\": \"person will continue walking\",\n    \"cyclists\": \"none visible\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"car should maintain safe distance from other vehicles\",\n    \"rule\": \"follow traffic rules and signals\"\n  },\n  \"region_inference\": \"likely in Europe based on road infrastructure and driving side\",\n  \"reasoning\": \"urban street with multiple lanes, traffic signals, and pedestrian sidewalk are typical of European cities. The presence of a single pedestrian on the sidewalk suggests a typical urban environment.\"\n}\n```\n\n\n\n```json\n{\n  \"scene_description",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 207,
+        "latency_s": 5.1
+      }
+    },
+    {
+      "frame_id": 36,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_036.jpg",
+      "latency_s": 5.299,
+      "out_tokens": 512,
+      "tok_per_s": 96.63,
+      "tokens_per_forward": 2.45,
+      "output": "```json\n{\n  \"scene_description\": \"A wet urban street with multiple lanes, lane markings, and tram lines. There are buildings on both sides of the street, and the sky is overcast.\",\n  \"traffic_elements\": {\n    \"road_type\": \"urban street\",\n    \"lane_layout\": \"multi-lane\",\n    \"lane_markings\": \"visible lane markings\",\n    \"traffic_signs\": \"none visible\",\n    \"crosswalks\": \"none visible\",\n    \"lighting\": \"street lighting\",\n    \"weather\": \"rainy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car1\": {\n        \"type\": \"sedan\",\n        \"position\": \"left side of the road, moving forward\"\n      },\n      \"car2\": {\n        \"type\": \"sedan\",\n        \"position\": \"right side of the road, moving forward\"\n      }\n    },\n    \"pedestrians\": {\n      \"pedest1\": {\n        \"type\": \"person\",\n        \"position\": \"sidewalk, walking towards the building\"\n      },\n      \"pedest2\": {\n        \"type\": \"person\",\n        \"position\": \"sidewalk, walking towards the building\"\n      }\n    },\n    \"cyclclists\": {\n      \"cyclist1\": {\n        \"type\": \"bicycle\",\n        \"position\": \"sidewalk, moving towards the building\"\n      },\n      \"cyclist2\": {\n        \"type\": \"bicycle\",\n        \"position\": \"sidewalk, moving towards the building\"\n      }\n    }\n  },\n  \"prediction\": {\n    \"vehicles\": {\n      \"car1\": {\n        \"behaviour\": \"continue moving forward\"\n      },\n      \"car2\": {\n        \"behaviour\": \"continue moving forward\"\n      }\n    },\n    \"pedestrians\": {\n      \"pedest1\": {\n        \"behaviour\": \"continue walking towards the building\"\n      },\n      \"pedest2\": {\n        \"behaviour\": \"continue walking towards the building\"\n      }\n    },\n    \"cyclclists\": {\n      \"cyclist1\": {\n        \"behaviour\": \"continue moving towards the building\"\n      },\n      \"cyclist2\": {\n        \"behaviour\": \"continue moving towards the building\"\n      }\n    }\n  },\n  \"planning\": {\n    \"ego_vehicle\": {\n      \"behaviour\": \"maintain safe distance from other vehicles",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 209,
+        "latency_s": 5.26
+      }
+    },
+    {
+      "frame_id": 37,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_037.jpg",
+      "latency_s": 5.972,
+      "out_tokens": 512,
+      "tok_per_s": 85.74,
+      "tokens_per_forward": 2.151,
+      "output": "```json\n{\n  \"scene_description\": \"Urban street scene with wet road, overcast sky, and various buildings.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Traffic signs present\",\n    \"crosswalks\": \"Crosswalks visible\",\n    \"lighting\": \"Daytime lighting\",\n    \"weather\": \"Overcast, wet road\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Car\",\n        \"position\": \"Left side of the road\",\n        \"action\": \"Driving\"\n      },\n      {\n        \"type\": \"Car\",\n        \"position\": \"Right side of the road\",\n        \"action\": \"Driving\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Pedestrian\",\n        \"position\": \"Crosswalk\",\n        \"action\": \"Walking\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Car\",\n        \"position\": \"Left side of the road\",\n        \"action\": \"Continue driving\"\n      },\n      {\n        \"type\": \"Car\",\n        \"position\": \"Right side of the road\",\n        \"action\": \"Continue driving\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Pedestrian\",\n        \"position\": \"Crosswalk\",\n        \"action\": \"Finish crossing\"\n      }\n    ],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\n        \"type\": \"Car\",\n        \"position\": \"Left side of the road\",\n        \"action\": \"Continue driving\"\n      }\n    ]\n  },\n  \"region_inference\": {\n    \"country\": \"Germany\",\n    \"justification\": \"Road infrastructure, signage, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzed road type, lane layout, lane markings, traffic signals, crosswalks, lighting, weather, and traffic participants.\",\n    \"prediction\": \"Predicted vehicle and pedestrian actions.\",\n    \"planning\": \"Planned ego vehicle action.\"\n  }\n}\n```\nThis annotation provides a detailed description of the scene, including",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 238,
+        "latency_s": 5.94
+      }
+    },
+    {
+      "frame_id": 38,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_038.jpg",
+      "latency_s": 7.678,
+      "out_tokens": 512,
+      "tok_per_s": 66.68,
+      "tokens_per_forward": 1.641,
+      "output": "```json\n{\n  \"scene_description\": \"Urban street scene with wet roads, overcast sky, and overhead tram lines.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Multi-lane road with visible traffic lanes\",\n    \"lane_markings\": \"Standard lane markings, including dashed lines\",\n    \"traffic_signs\": \"Traffic lights and road signs\",\n    \"crosswalks\": \"Visible pedestrian crosswalks\",\n    \"lighting\": \"Streetlights and ambient illumination\",\n    \"weather\": \"Overcast, wet conditions\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": \"Silver car in the foreground, moving towards the camera\"\n    },\n    \"pedestrians\": {\n      \"person\": \"Individual walking on the sidewalk, holding an umbrella\"\n    },\n    \"cyclists\": {\n      \"bicycle\": \"Bicycle parked on the sidewalk\"\n    }\n  },\n  \"prediction\": {\n    \"car\": \"Lik to continue moving forward on the road\",\n    \"pedestrian\": \"Lik to continue walking on the sidewalk\",\n    \"bicycle\": \"Lik to remain stationary on the sidewalk\"\n  },\n  \"planning\": {\n    \"car\": \"Maintain speed and pay attention to traffic signals\",\n    \"pedestrian\": \"Continue walking and be aware of the surroundings\",\n    \"bicycle\": \"Stay parked on the sidewalk\"\n  },\n  \"region_inference\": {\n    \"country/region\": \"Germany, based on the road infrastructure, signage, and driving side\",\n    \"justification\": \"The presence of tram lines, the design of the signs, and the driving side are indicative of German urban areas.\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzed the road type, lane layout, lane markings, traffic signals/signs, crosswalks, lighting and weather, and every important traffic participant.\",\n    \"prediction\": \"Predicted the short-term behavior of vehicles, pedestrians, and cyclists.\",\n    \"planning\": \"Planned the next actions for the ego vehicle and other participants.\",\n    \"region_inference\": \"Inferred the country/region based on the road infrastructure, signage, and driving side.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 312,
+        "latency_s": 7.64
+      }
+    },
+    {
+      "frame_id": 39,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_039.jpg",
+      "latency_s": 4.715,
+      "out_tokens": 320,
+      "tok_per_s": 67.86,
+      "tokens_per_forward": 1.693,
+      "output": "```json\n  \"scene_description\": \"Urban street with tram lines, residential buildings, and a Penny store.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Multi-lane road with tram lines\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"No visible traffic signs\",\n    \"crosswalks\": \"Visible crosswalks\",\n    \"lighting\": \"Streetlights present\",\n    \"weather\": \"Cloudy and rainy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"No vehicles visible\",\n    \"pedestrians\": \"Two pedestrians with umbrellas\",\n    \"cyclists\": \"No cyclists visible\"\n  },\n  \"prediction\": {\n    \"pedestrians\": \"Pedestrians will continue walking across the street\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Ego vehicle should slow down and wait for pedestrians to cross\"\n  },\n  \"region_inference\": {\n    \"country/region\": \"Germany\",\n    \"justification\": \"Tram lines, Penny store, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Observation of road conditions and pedestrian behavior\",\n    \"prediction\": \"Expectation of pedestrian crossing\",\n    \"planning\": \"Safety measure for ego vehicle\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 189,
+        "latency_s": 4.68
+      }
+    },
+    {
+      "frame_id": 40,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_040.jpg",
+      "latency_s": 5.721,
+      "out_tokens": 352,
+      "tok_per_s": 61.53,
+      "tokens_per_forward": 1.517,
+      "output": "```json\n{\n  \"scene_description\": \"Urban street scene with tram lines, pedestrians, and a Penny store.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road with tram lines\",\n    \"lane_markings\": \"White dashed lane lines, tram lines\",\n    \"traffic_signs\": \"Penny store sign, traffic lights\",\n    \"crosswalks\": \"Pedestrian crosswalk\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Cloudy, overcast\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"Tram, parked cars\",\n    \"pedestrians\": \"Person with red umbrella, other pedestrians\",\n    \"cyclists\": \"No cyclists\"\n  },\n  \"prediction\": {\n    \"tram\": \"Moving along tram lines\",\n    \"pedestrians\": \"Walking across crosswalk, standing on sidewalk\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Follow the tram, yield to pedestrians\",\n    \"rule\": \"Traffic rules, pedestrian safety\"\n  },\n  \"region_inference\": {\n    \"country\": \"Germany\",\n    \"justification\": \"Tram lines, Penny store, driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Observation of traffic elements and dynamic participants\",\n    \"prediction\": \"Inference of short-term behavior based on traffic rules\",\n    \"planning\": \"Decision-making for ego vehicle based on traffic rules\",\n    \"region_inference\": \"Identification of country based on road infrastructure and signage\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 232,
+        "latency_s": 5.69
+      }
+    },
+    {
+      "frame_id": 41,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_041.jpg",
+      "latency_s": 5.117,
+      "out_tokens": 352,
+      "tok_per_s": 68.79,
+      "tokens_per_forward": 1.709,
+      "output": "```json\n  \"scene_description\": \"Urban street with tram lines, traffic signals, and pedestrians\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Multi-lane road\",\n    \"lane_markings\": \"Solid and dashed lines\",\n    \"traffic_signs\": \"Traffic lights and road signs\",\n    \"crosswalks\": \"Pedestrian crosswalks\",\n    \"lighting\": \"Street lighting\",\n    \"weather\": \"Overcast\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"Cars and tram\",\n    \"pedestrians\": \"People walking on sidewalks\",\n    \"cyclists\": \"Bicycles on the road\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"Obeing to traffic signals\",\n    \"pedestrians\": \"Crossing at crosswalks\",\n    \"cyclists\": \"Riding along the road\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"Staying within lane markings\",\n    \"rule\": \"Following traffic rules\"\n  },\n  \"region_inference\": {\n    \"country\": \"Germany\",\n    \"justification\": \"Tram lines, signage, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzing road conditions and traffic patterns\",\n    \"prediction\": \"Forecasting the movement of traffic participants\",\n    \"planning\": \"Determining the optimal path for the ego vehicle\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 352,
+        "total_tokens": 2041,
+        "nfe": 206,
+        "latency_s": 5.08
+      }
+    },
+    {
+      "frame_id": 42,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_042.jpg",
+      "latency_s": 6.704,
+      "out_tokens": 416,
+      "tok_per_s": 62.05,
+      "tokens_per_forward": 1.524,
+      "output": "```json\n{\n  \"scene_description\": \"Urban street with tram lines, multiple lanes, and residential buildings. The sky is overcast, and the road is wet, indicating recent rain.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Multiple lanes with tram lines\",\n    \"lane_markings\": \"Visible lane markings and tram lines\",\n    \"traffic_signs\": \"Traffic lights and signs are visible\",\n    \"crosswalks\": \"Crosswalks are present\",\n    \"lighting\": \"Streetlights are on\",\n    \"weather\": \"Overcast and wet road\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"Several vehicles are present, including a red car and a white van\",\n    \"pedestrians\": \"Pedestrians are walking on the sidewalks\",\n    \"cyclists\": \"Cyclists are visible on the road\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"Vehicles will continue to move along the road\",\n    \"pedestrians\": \"Pedestrians will continue crossing the crosswalks\",\n    \"cyclists\": \"Cyclists will continue to ride along the road\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"The ego vehicle should maintain a safe distance from other vehicles and pedestrians\",\n    \"rule\": \"Follow traffic rules and prioritize safety\"\n  },\n  \"region_inference\": {\n    \"region\": \"European city\",\n    \"justification\": \"Tram lines, traffic signs, and crosswalks are common in European cities\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Analyzing the road type, lane layout, and traffic elements\",\n    \"prediction\": \"Predicting the behavior of vehicles, pedestrians, and cyclists\",\n    \"planning\": \"Planning the next action for the ego vehicle based on traffic rules\"\n  }\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 273,
+        "latency_s": 6.67
+      }
+    },
+    {
+      "frame_id": 43,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_043.jpg",
+      "latency_s": 5.943,
+      "out_tokens": 416,
+      "tok_per_s": 70.0,
+      "tokens_per_forward": 1.733,
+      "output": "```json\n  \"scene_description\": \"A city street with wet roads, overcast sky, and residential buildings.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road\",\n    \"lane_markings\": \"Visible lane markings\",\n    \"traffic_signs\": \"Traffic lights and signs\",\n    \"crosswalks\": \"Visible crosswalks\",\n    \"lighting\": \"Streetlights\",\n    \"weather\": \"Rainy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": {\n      \"car\": \"One car on the road\"\n    },\n    \"pedestrians\": {\n      \"people\": \"Two pedestrians on the sidewalk\"\n    },\n    \"cyclists\": {\n      \"bike\": \"One bicycle on the sidewalk\"\n    }\n  },\n  \"prediction\": {\n    \"car\": \"The car will continue to drive on the road\",\n    \"pedestrians\": \"The pedestrians will continue to walk on the sidewalk\",\n    \"bike\": \"The bicycle will continue to ride on the sidewalk\"\n  },\n  \"planning\": {\n    \"car\": \"The car should maintain a safe distance from the pedestrians\",\n    \"pedestrians\": \"The pedestrians should be aware of the traffic\",\n    \"bike\": \"The bicycle should yield to the pedestrians\"\n  },\n  \"region_inference\": {\n    \"country\": \"Germany\",\n    \"justification\": \"Based on the road infrastructure, signage, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"The scene is a typical urban street in Germany\",\n    \"prediction\": \"The car and pedestrians will continue their current activities\",\n    \"planning\": \"The car should be cautious of the pedestrians and the bicycle\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 416,
+        "total_tokens": 2105,
+        "nfe": 240,
+        "latency_s": 5.91
+      }
+    },
+    {
+      "frame_id": 44,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_044.jpg",
+      "latency_s": 6.151,
+      "out_tokens": 384,
+      "tok_per_s": 62.43,
+      "tokens_per_forward": 1.536,
+      "output": "```json\n{\n  \"scene_description\": \"An urban street scene with a bus in the foreground, traffic signals, and modern buildings in the background. The weather appears to be overcast.\",\n  \"traffic_elements\": {\n    \"road\": \"Multi-lane road with clear lane markings\",\n    \"lanes\": \"Multiple lanes with white and yellow markings\",\n    \"traffic_signals\": \"Traffic lights visible at the intersection\",\n    \"crosswalks\": \"Crosswalk present at the intersection\",\n    \"lighting\": \"Streetlights and natural light from the sky\",\n    \"weather\": \"Overcast sky\"\n  },\n  \"dynamic_agents\": {\n    \"bus\": \"A bus is present in the foreground, moving along the road\",\n    \"pedestrians\": \"No pedestrians visible in the image\",\n    \"cyclists\": \"No cyclists visible in the image\"\n  },\n  \"prediction\": {\n    \"bus\": \"The bus will continue to move forward along the road\",\n    \"pedestrians\": \"No pedestrians are expected to cross the street\",\n    \"cyclists\": \"No cyclists are expected to use the road\"\n  },\n  \"planning\": {\n    \"bus\": \"The bus should maintain its speed and obey the traffic signals\",\n    \"pedestrians\": \"No action required for pedestrians\",\n    \"cyclists\": \"No action required for cyclists\"\n  },\n  \"region_inference\": \"The scene is likely in a developed urban area, possibly in North America or Europe, based on the road infrastructure and traffic signals.\",\n  \"reasoning\": \"The presence of multiple lanes, traffic signals, and a bus suggests a busy urban environment. The overcast sky indicates cloudy weather conditions.\"\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 384,
+        "total_tokens": 2073,
+        "nfe": 250,
+        "latency_s": 6.12
+      }
+    },
+    {
+      "frame_id": 45,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_045.jpg",
+      "latency_s": 5.172,
+      "out_tokens": 320,
+      "tok_per_s": 61.87,
+      "tokens_per_forward": 1.531,
+      "output": "```json\n{\n  \"scene_description\": \"A city street with a white bus in the foreground, surrounded by modern buildings with glass facades. The sky is overcast, and the road is marked with white lines. There are trees lining the sidewalk, and a few pedestrians are visible in the distance.\",\n  \"traffic_elements\": {\n    \"road\": \"Multi-lane road with white lane markings\",\n    \"bus\": \"White bus positioned in the center of the image\",\n    \"buildings\": \"Modern buildings with glass facades\",\n    \"trees\": \"Trees lining the sidewalk\",\n    \"pedestrians\": \"A few pedestrians in the distance\"\n  },\n  \"dynamic_agents\": {\n    \"bus\": \"The bus is stationary at the moment\",\n    \"pedestrians\": \"The pedestrians are walking on the sidewalk\"\n  },\n  \"prediction\": {\n    \"bus\": \"The bus will likely remain stationary for a short while\",\n    \"pedestrians\": \"The pedestrians will continue walking along the sidewalk\"\n  },\n  \"planning\": {\n    \"bus\": \"The bus should remain stationary until it needs to move\",\n    \"pedestrians\": \"The pedestrians should continue walking along the sidewalk\"\n  },\n  \"region_inference\": \"The region is likely in a developed country with modern infrastructure\",\n  \"reasoning\": \"The presence of modern buildings, clear road markings, and well-maintained infrastructure suggest a developed country\"\n}\n```\nThis annotation provides a detailed description of the scene,",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 320,
+        "total_tokens": 2009,
+        "nfe": 209,
+        "latency_s": 5.14
+      }
+    },
+    {
+      "frame_id": 46,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_046.jpg",
+      "latency_s": 5.396,
+      "out_tokens": 512,
+      "tok_per_s": 94.89,
+      "tokens_per_forward": 2.404,
+      "output": "```json\n{\n  \"scene_description\": \"A city street scene with a large white truck in the foreground, stopped at a traffic light. The truck is on the right side of the road, and there are several cars in the background. The traffic light is red, and there is a pedestrian crossing in the distance. The sky is overcast, and the road appears to be dry.\",\n  \"traffic_elements\": {\n    \"cars\": [\n      {\n        \"type\": \"sedan\",\n        \"color\": \"white\",\n        \"position\": \"Background, on the right side of the road\"\n      },\n      {\n        \"type\": \"sedan\",\n        \"color\": \"black\",\n        \"position\": \"Background, on the left side of the road\"\n      }\n    ],\n    \"truck\": {\n      \"type\": \"large truck\",\n      \"color\": \"white\",\n      \"position\": \"Foreground, on the right side of the road\"\n    },\n    \"traffic_light\": {\n      \"color\": \"red\",\n      \"position\": \"Foreground, in the center of the image\"\n    },\n    \"pedestrian_cross\": {\n      \"position\": \"Background, on the left side of the road\"\n    }\n  },\n  \"dynamic_agents\": {\n    \"truck\": {\n      \"state\": \"stopped\",\n      \"position\": \"Foreground, on the right side of the road\"\n    },\n    \"cars\": [\n      {\n        \"type\": \"sedan\",\n        \"color\": \"white\",\n        \"state\": \"moving\",\n        \"position\": \"Background, on the right side of the road\"\n      },\n      {\n        \"type\": \"sedan\",\n        \"color\": \"black\",\n        \"state\": \"moving\",\n        \"position\": \"Background, on the left side of the road\"\n      }\n    ]\n  },\n  \"prediction\": {\n    \"truck\": {\n      \"state\": \"stopped\",\n      \"position\": \"Foreground, on the right side of the road\"\n    },\n    \"cars\": [\n      {\n        \"type\": \"sedan\",\n        \"color\": \"white\",\n        \"state\": \"moving\",\n        \"position\": \"Background, on the right side of the road\"\n      },\n      {\n        \"type\": \"sedan\",\n        \"color\": \"black\",\n        \"state\": \"moving\",\n        \"position\": \"Background, on the left side of the road\"",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1689,
+        "completion_tokens": 512,
+        "total_tokens": 2201,
+        "nfe": 213,
+        "latency_s": 5.36
+      }
+    },
+    {
+      "frame_id": 47,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_047.jpg",
+      "latency_s": 6.825,
+      "out_tokens": 512,
+      "tok_per_s": 75.02,
+      "tokens_per_forward": 2.216,
+      "output": "```json\n  \"scene_description\": \"A busy urban intersection with multiple lanes, traffic signals, and a mix of vehicles and pedestrians.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban intersection\",\n    \"lane_layout\": \"Multi-lane road with turning and straight lanes\",\n    \"lane_markings\": \"Visible lane markings including dashed lines and solid white lines\",\n    \"traffic_signals\": \"Traffic lights showing red and green signals\",\n    \"crosswalks\": \"Pedestrian crosswalks visible\",\n    \"lighting\": \"Natural daylight with clear skies\",\n    \"weather\": \"Clear and sunny\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"White\",\n        \"position\": \"In the turning lane\",\n        \"action\": \"Moving\"\n      },\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"Black\",\n        \"position\": \"In the straight lane\",\n        \"action\": \"Moving\"\n      },\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"Gray\",\n        \"position\": \"In the turning lane\",\n        \"action\": \"Moving\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Adult\",\n        \"position\": \"In the crosswalk\",\n        \"action\": \"Crossing the street\"\n      },\n      {\n        \"type\": \"Adult\",\n        \"position\": \"In the crosswalk\",\n        \"action\": \"Crossing the street\"\n      }\n    ]\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"White\",\n        \"position\": \"In the turning lane\",\n        \"action\": \"Will turn left\"\n      },\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"Black\",\n        \"position\": \"In the straight lane\",\n        \"action\": \"Will continue straight\"\n      },\n      {\n        \"type\": \"Sedan\",\n        \"color\": \"Gray\",\n        \"position\": \"In the turning lane\",\n        \"action\": \"Will turn left\"\n      }\n    ],\n    \"pedestrians\": [\n      {\n        \"type\": \"Adult\",\n        \"position\": \"In the crosswalk\",\n        \"action\": \"Will cross the street\"\n      },\n      {\n        \"type\": \"Adult\",\n        \"position\": \"In",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1230,
+        "completion_tokens": 512,
+        "total_tokens": 1742,
+        "nfe": 231,
+        "latency_s": 6.8
+      }
+    },
+    {
+      "frame_id": 48,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_048.jpg",
+      "latency_s": 6.352,
+      "out_tokens": 352,
+      "tok_per_s": 55.41,
+      "tokens_per_forward": 1.564,
+      "output": "```json\n{\n  \"scene_description\": \"A city street scene with multiple buildings, traffic signals, and road markings.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Two-lane road with a dedicated bike lane\",\n    \"lane_markings\": \"White dashed lines, yellow dashed bike lines for bike lane\",\n    \"traffic_signals\": \"Traffic lights at the intersection\",\n    \"crosswalks\": \"Pedestrian crosswalk at the intersection\",\n    \"lighting\": \"Streetlights along the road\",\n    \"weather\": \"Clear with some clouds\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": \"A white car in the foreground, other cars in the distance\",\n    \"pedestrians\": \"Two pedestrians at the crosswalk\",\n    \"cyclists\": \"A cyclist in the bike lane\"\n  },\n  \"prediction\": {\n    \"vehicles\": \"The white car will continue straight, other cars will stop at the intersection\",\n    \"pedestrians\": \"The pedestrians will cross the crosswalk\",\n    \"cyclists\": \"The cyclist will continue in the bike lane\"\n  },\n  \"planning\": {\n    \"ego_vehicle\": \"The white car should continue straight\",\n    \"rule\": \"Follow traffic signals and road markings\"\n  },\n  \"region_inference\": {\n    \"country\": \"United Kingdom\",\n    \"justification\": \"The road infrastructure, signage, and driving side are consistent with the UK\"\n  },\n  \"reasoning\": \"The scene is typical of an urban street in the UK with clear traffic rules and infrastructure\"\n}\n```\nThis",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1842,
+        "completion_tokens": 352,
+        "total_tokens": 2194,
+        "nfe": 225,
+        "latency_s": 6.3
+      }
+    },
+    {
+      "frame_id": 49,
+      "frame_path": "/weka/home/ext-yingzima/dVLM/autolabeling/frames/frame_049.jpg",
+      "latency_s": 5.546,
+      "out_tokens": 416,
+      "tok_per_s": 75.01,
+      "tokens_per_forward": 1.857,
+      "output": "```json\n  \"scene_description\": \"Urban street scene with multiple lanes, crosswalks, and traffic participants.\",\n  \"traffic_elements\": {\n    \"road_type\": \"Urban street\",\n    \"lane_layout\": \"Multi-lane road\",\n    \"lane_markings\": \"Solid and dashed lines\",\n    \"traffic_signs\": \"Traffic lights and street signs\",\n    \"crosswalks\": \"Pedestrian crosswalks\",\n    \"lighting\": \"Street lighting\",\n    \"weather\": \"Cloudy\"\n  },\n  \"dynamic_agents\": {\n    \"vehicles\": [\n      {\"type\": \"car\", \"position\": \"Center of the road\", \"color\": \"Black\"}\n    ],\n    \"pedestrians\": [\n      {\"type\": \"person\", \"position\": \"Crosswalk\", \"action\": \"Walking\"}\n    ],\n    \"cyclists\": []\n  },\n  \"prediction\": {\n    \"vehicles\": [\n      {\"type\": \"car\", \"position\": \"Center of the road\", \"action\": \"Continuing forward\"}\n    ],\n    \"pedestrians\": [\n      {\"type\": \"person\", \"position\": \"Crosswalk\", \"action\": \"Crossing the street\"}\n    ],\n    \"cyclists\": []\n  },\n  \"planning\": {\n    \"ego_vehicle\": [\n      {\"type\": \"car\", \"position\": \"Center of the road\", \"action\": \"Maintain lane position\"}\n    ]\n  },\n  \"region_inference\": {\n    \"region\": \"Europe\",\n    \"justification\": \"Urban infrastructure, signage, and driving side\"\n  },\n  \"reasoning\": {\n    \"perception\": \"Identified road type, lane layout, and traffic participants.\",\n    \"prediction\": \"Predicted vehicle and pedestrian movements.\",\n    \"planning\": \"Planned ego vehicle action to maintain lane position.\"\n  }\n}\n```",
+      "valid_json": false,
+      "usage": {
+        "prompt_tokens": 1230,
+        "completion_tokens": 416,
+        "total_tokens": 1646,
+        "nfe": 224,
+        "latency_s": 5.52
+      }
+    }
+  ],
+  "summary": {
+    "load_time_s": 0.0,
+    "n_samples": 50,
+    "n_in_avg": 49,
+    "avg_latency_s": 5.701,
+    "avg_out_tokens": 401.6,
+    "avg_tok_per_s": 70.45,
+    "avg_tokens_per_forward": 1.776,
+    "valid_json_rate": 0.0,
+    "total_wall_s": 286.8
+  },
+  "note": "native FastAPI diffusion server (model.generate); SGLang can't serve this VLM arch"
+}

@@ -1,0 +1,13 @@
+# generated / machine-specific (regenerate with prepare_frames.py)
+/frames/
+logs/
+demo/results/
+_offload/
+sglang_storage/
+
+# python
+__pycache__/
+*.pyc
+
+# never commit containers
+*.sif
